@@ -1,0 +1,17 @@
+$bottom-navbar-hegith: 50px;
+$top-navbar-height: 46px;
+@mixin dev-outline {
+    box-shadow: 0 0 0 0.5px #00bb00;
+}
+
+@import './reset.scss';
+@import './components/bottom-navbar/style.scss';
+@import './components/top-navbar/style.scss';
+@import './components/wiki-list-item/style.scss';
+@import './components/wiki-list/style.scss';
+@import './components/card/style.scss';
+
+
+main.explore{
+    flex-direction: column;
+}

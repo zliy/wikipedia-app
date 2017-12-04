@@ -1,0 +1,49 @@
+
+
+li.wiki-list-item {
+    display: block; // not list-item
+    height: 60px;
+    &.border {
+        border-top: 0.5px solid #ccc;
+        &:last-child {
+            border-bottom: 0.5px solid #ccc
+        }
+    }
+    >a {
+        display: flex;
+        height: 100%;
+        padding: 8px 20px;
+        flex-grow: 1;
+        justify-content: space-between;
+        color: black;
+        text-decoration: none;
+        section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            h4 {
+                margin: 0;
+                font-weight: 500;
+                color: #222;
+            }
+            p {
+                margin: 0;
+                font-size: 13px; // width: 310px;
+                color: #777;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            min-width: 0;
+        }
+        div {
+            flex-shrink: 0;
+            width: 44px;
+            margin-left: 4px;
+            border-radius: 4px;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+}
