@@ -7,22 +7,18 @@ import Card from '@cpt/card/'
 
 
 export default class extends React.Component {
-    constructor(props) {
-        super(props)
-
-    }
-
     componentWillUnmount() {
         console.log('explore: componentWillUnmount')
     }
     render() {
         console.log('explore rendered')
-
+        console.log(this.props)
         return (
             <main className="explore">
                 <TopNavBar
                     iconLeft={TopNavBar.i.settings}
                     iconRight={TopNavBar.i.search}
+                    onLeftClick= {()=>this.props.history.push('/settings')}
                 >Explore</TopNavBar>
 
                 <Card>

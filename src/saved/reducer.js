@@ -4,14 +4,24 @@
 
 // savedItems:
 export default function (state = [], action) {
-    console.log("⭐️action: ", action)
     switch (action.type) {
-        case 'FETCH_SUMMARY': {
-            state = action.payload
+        case 'SAVED/INIT_STATE': {
             return state
         }
+        case 'SAVED/SUMMARY_RECEIVED': {
+
+            return state
+        }
+
         default:
             return state;
     }
 }
 
+/* 
+actions:
+add
+remove
+clear
+
+*/

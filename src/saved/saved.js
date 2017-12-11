@@ -7,6 +7,7 @@ import WikiListItem from '@cpt/wiki-list-item'
 
 import WikiList from '@cpt/wiki-list/'
 
+import get from '@/js/fetch'
 
 let scroll = 0
 
@@ -15,7 +16,6 @@ class Saved extends React.Component {
         super(props)
     }
     componentWillMount() {
-        this.props.fetchSummary()
     }
     componentDidMount() {
         window.scroll(0, scroll)
@@ -31,33 +31,28 @@ class Saved extends React.Component {
         const { items } = this.props
         return (
             < main >
-            <TopNavBar
-                // iconLeft={TopNavBar.i.back}
-                leftContent={'Clear'}
-                iconRight={TopNavBar.i.search}
-                // eslint-disable-next-line
-                onTitleClick={() => location.reload()}
-                onLeftClick={console.log.bind(null, 'Left clicked')}
-            >Saved</TopNavBar>
-            <WikiList items={items}></WikiList>
-            <BottomNavBar></BottomNavBar>
+                <TopNavBar
+                    // iconLeft={TopNavBar.i.back}
+                    leftContent={'Clear'}
+                    iconRight={TopNavBar.i.search}
+                    // eslint-disable-next-line
+                    onTitleClick={() => location.reload()}
+                    onLeftClick={console.log.bind(null, 'Left clicked')}
+                >Saved</TopNavBar>
+                <WikiList items={items}></WikiList>
+                <BottomNavBar></BottomNavBar>
             </main >
         )
     }
 }
 
+
 function fetchSummary(items) {
     return function (dispatch) {
-        console.log('fetchSummary dispatch')
-        return Promise.all(items.map(
-            (title) => fetch(`https://zh.wikipedia.org/api/rest_v1/page/summary/${title}`).then((resp) => resp.json()))
-        )
-            .then(jsons => {
-                return dispatch({ type: 'FETCH_SUMMARY', payload: jsons })
-
-            })
+        return 
     }
-}
+} 
+
 
 function mapState(state) {
     return {
@@ -66,7 +61,7 @@ function mapState(state) {
 }
 function mapDispatch(dispatch) {
     return {
-        fetchSummary: () => dispatch(fetchSummary(window.fakeSaved))
+        getSummary: () => dispatch(),
     }
 }
 

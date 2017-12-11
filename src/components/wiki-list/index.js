@@ -17,7 +17,7 @@ export default class extends React.Component {
                 <ul>
                     {
                         items.map((item) => {
-                            return <WikiListItem {...{ ...item }}></WikiListItem>
+                            return <WikiListItem key={item.title} {...{ ...item }}></WikiListItem>
                         })
                     }
                 </ul>
