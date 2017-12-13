@@ -1,5 +1,5 @@
 
-export default function (state = window.fakeHistory, action) {
+export default function (state = window.historyItems, action) {
     switch (action.type) {
         case "HISTORY/FETCH_SUMMARY": {
             state = action.payload

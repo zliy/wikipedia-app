@@ -1,12 +1,16 @@
 
-
+import { storageSavedToState } from '@/js/localstorage'
 
 
 // savedItems:
 export default function (state = [], action) {
     switch (action.type) {
-        case 'SAVED/INIT_STATE': {
+        case 'SAVED/LOAD_LOCAL': {
+            storageSavedToState()
             return state
+        }
+        case 'SAVED/LOCAL_LOADED': {
+            return action.payload
         }
         case 'SAVED/SUMMARY_RECEIVED': {
 

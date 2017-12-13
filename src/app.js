@@ -10,6 +10,7 @@ import { View as History } from '@/history/'
 import Wiki from '@/wiki/'
 import Settings from "@/settings/"
 
+import { storageSavedToState } from '@/js/localstorage'
 class App extends React.Component {
     constructor(props) {
         super(props)
@@ -17,7 +18,7 @@ class App extends React.Component {
     }
     componentWillMount() {
         // this.props.initSaved()
-        store.dispatch({ type: 'SAVED/INIT_STATE' })
+        // store.dispatch(storageSavedToState())
         console.log('👉 componentWillMount')
     }
 
