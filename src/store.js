@@ -8,6 +8,7 @@ import logger from "redux-logger"
 
 import { reducer as savedReducer } from '@/saved'
 import { reducer as historyReducer } from '@/history'
+import { reducer as exploreReducer } from '@/explore'
 
 export const history = createHistory()
 const routerMW = routerMiddleware(history)
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     rotuer: routerReducer,
     savedItems: savedReducer,
     historyItems: historyReducer,
+    explored: exploreReducer
     // historyWikisContent, // 返回时直接加载页面数据
 })
 

@@ -3,10 +3,6 @@ import WikiListItem from '../wiki-list-item'
 
 
 export default class extends React.Component {
-    constructor(props) {
-        super(props)
-
-    }
 
     render() {
         const { items, children } = this.props

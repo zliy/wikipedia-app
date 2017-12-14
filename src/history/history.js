@@ -7,20 +7,20 @@ import WikiList from '@cpt/wiki-list/'
 
 import mapTime from '@/js/mapTime'
 
+let scroll = 0
+
 class History extends React.Component {
-    constructor(props) {
-        super(props)
-
+    
+    componentWillUnmount() {
+        scroll = window.scrollY
     }
-
-    componentWillMount() {
-
-        // this.props.fetchSummary(this.props.historyGroups)
+    componentDidMount() {
+        window.scroll(0, scroll)
     }
 
     render() {
         const { historyGroups } = this.props
-        console.log(historyGroups)
+        console.log('mapped historyGroups: ', historyGroups)
         return (
             <main>
                 <TopNavBar on
@@ -31,8 +31,8 @@ class History extends React.Component {
                     onTitleClick={() => location.reload()}
                     onLeftClick={console.log.bind(null, 'Left clicked')}
                 >History</TopNavBar>
-                {historyGroups.map(item => {
-                    return <WikiList items={item.data}>{item.readableTime}</WikiList>
+                {historyGroups.map(group => {
+                    return <WikiList items={group.data}>{group.readableTime}</WikiList>
                 })}
                 <BottomNavBar></BottomNavBar>
             </main>
@@ -42,40 +42,19 @@ class History extends React.Component {
 
 function mapState(state) {
     function splitHistory(items) {
-        return items.reduceRight((ary, item) => {
-            let timeindex = mapTime(item.time)
-            ary[timeindex.index] = ary[timeindex.index]
-                || { readableTime: timeindex.readableTime, data: [] }
-            ary[timeindex.index].data.push(item)
-            return ary
+        return items.reduceRight((mapedState, item) => {
+            let { readableTime, index } = mapTime(item.time)
+            mapedState[index] = mapedState[index] || { readableTime, data: [] }
+            mapedState[index].data.push(item.summary)
+            return mapedState
         }, [])
     }
+    console.log(state.historyItems)
     return {
         historyGroups: splitHistory(state.historyItems),
     }
 }
 
-function fetchSummary(groups) {
-    return function (dispatch) {
-        console.log('fetchSummary dispatch')
-        return Promise.all(groups.reduce(
-            (allPoms, oneday) =>
-                allPoms.concat(oneday.data.reduce((memo, { title }) =>
-                    memo.concat(fetch(`https://zh.wikipedia.org/api/rest_v1/page/summary/${title}`).then((resp) => resp.json()))
-                    , []))
-            , [])
-        )
-            .then(jsons => {
-                return dispatch({ type: 'HISTORY/FETCH_SUMMARY', payload: jsons })
 
-            })
-    }
-}
-
-export default connect(mapState, function (dispatch) {
-    return {
-        fetchSummary: (items) => dispatch(fetchSummary(items))
-    }
-
-})(History)
+export default connect(mapState)(History)
 

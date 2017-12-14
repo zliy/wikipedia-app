@@ -2,11 +2,10 @@ import React from "react"
 import TopNavBar from "@cpt/top-navbar"
 import JView from "react-json-view"
 
-class Setting extends React.Component {
-    constructor(props) {
-        super(props)
+import Dexie from 'dexie';
+import db from '@/js/db'
 
-    }
+class Setting extends React.Component {
 
     render() {
         const { history } = this.props
@@ -19,16 +18,21 @@ class Setting extends React.Component {
                     onLeftClick={() => history.goBack()}
                 >Settings</TopNavBar>
                 <section>
-                    <h2>localstorage
+                    
                         <button style={{ color: "blue" }}
-                            onClick={() => { localStorage.clear(); this.forceUpdate() }}> Clear
+                            onClick={() => { db.delete().then(()=>{window.location.reload()});  }}> 
+                            delete indexDB:wikipedia
                                 </button>
-                    </h2>
-                    {Object.keys(localStorage).map((valkey) => {
+                    
+
+                    <button style={{ color: "blue" }} onClick={()=>{window.loadTestDataToIndexDB()}}
+                    >loadTestDataToIndexDB()</button>
+
+                    {/* {Object.keys(localStorage).map((valkey) => {
                         return <JView key={valkey}
                             indentWidth="2" collapsed="1" name={valkey}
                             src={JSON.parse(localStorage[valkey])}></JView>
-                    })}
+                    })} */}
                 </section>
             </main>
         )

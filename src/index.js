@@ -19,8 +19,8 @@ ReactDOM.render(
 
   , document.getElementById('root'))
 
+
 // eslint-disable-next-line
 // setTimeout(() => { if (location.pathname !== '/saved') location.replace('/saved') }, 1000)
 
 window.store = store
-window.push = push

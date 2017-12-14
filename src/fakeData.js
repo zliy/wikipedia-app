@@ -1,111 +1,85 @@
 import Dexie from 'dexie';
-localStorage.setItem('savedItems', JSON.stringify(
-    [
-        { title: '公开密钥加密', },
-        { title: '木星', },
-        { title: 'React', },
-        { title: '辽太宗', },
-        { title: '銀翼殺手2049', },
-        { title: '江苏省', },
-        { title: 'JavaScript', },
-        { title: '二进制', },
-        { title: '史蒂夫·乔布斯', },
-        { title: '时间复杂度', },
-        { title: 'Google', },
-        { title: '维基百科', },
-        { title: 'Node.js', },
-        { title: '马男波杰克', },
-    ]
-))
-localStorage.setItem('historyItems', JSON.stringify(
-    [
-        { title: '赤道', time: Date.now() - 86400 * 365 * 1000 },
-        { title: '史蒂夫·乔布斯', time: Date.now() - 86400 * 365 * 1000 },
+import db, { tableStruct } from '@/js/db'
 
-        { title: 'Python', time: Date.now() - 86400 * 30 * 1000 },
+const DAYINMS = 86400 * 1000
+const NOW = Date.now()
 
-        { title: 'Scheme', time: Date.now() - 86400 * 4 * 1000 },
-        { title: 'React', time: Date.now() - 86400 * 4 * 1000 },
-        { title: 'LISP', time: Date.now() - 86400 * 4 * 1000 },
-        { title: 'Fortran', time: Date.now() - 86400 * 4 * 1000 },
+const savedItems = [
+    { title: '马男波杰克', },
+    { title: 'Node.js', },
+    { title: '维基百科', },
+    { title: 'Google', },
+    { title: '时间复杂度', },
+    { title: '史蒂夫·乔布斯', },
+    { title: '二进制', },
+    { title: 'JavaScript', },
+    { title: '江苏省', },
+    { title: '銀翼殺手2049', },
+    { title: '辽太宗', },
+    { title: 'React', },
+    { title: '木星', },
+    { title: '公开密钥加密', },
+]
 
-        { title: '马男波杰克', time: Date.now() - 86400 * 3 * 1000 },
+const historyItems = [
+    { title: '赤道', time: NOW - DAYINMS * 365 },
+    { title: '史蒂夫·乔布斯', time: NOW - DAYINMS * 365 },
 
-        { title: 'Ruby', time: Date.now() - 86400 * 2 * 1000 },
-        { title: 'Node.js', time: Date.now() - 86400 * 2 * 1000 },
+    { title: 'Python', time: NOW - DAYINMS * 30 },
 
-        { title: '维基百科', time: Date.now() - 86400 * 1000 },
-        { title: 'Google', time: Date.now() - 86400 * 1000 },
-        { title: '銀翼殺手2049', time: Date.now() - 86400 * 1000 },
-        { title: '辽太宗', time: Date.now() - 86400 * 1000 },
-        { title: '二进制', time: Date.now() - 86400 * 1000 },
-        { title: '木星', time: Date.now() - 86400 * 1000 },
-        { title: '公开密钥加密', time: Date.now() - 86400 * 1000 },
+    { title: 'Scheme', time: NOW - DAYINMS * 4 },
+    { title: 'React', time: NOW - DAYINMS * 4 },
+    { title: 'LISP', time: NOW - DAYINMS * 4 },
+    { title: 'Fortran', time: NOW - DAYINMS * 4 },
 
-        { title: '时间复杂度', time: Date.now() - 10000 },
-        { title: 'JavaScript', time: Date.now() - 10000 },
-    ]
-))
+    { title: '马男波杰克', time: NOW - DAYINMS * 3 },
 
+    { title: 'Ruby', time: NOW - DAYINMS * 2 },
+    { title: 'Node.js', time: NOW - DAYINMS * 2 },
 
-window.fakeCache = JSON.parse(localStorage.HTTP_CACHE || '{}')
-window.savedItems = JSON.parse(localStorage.savedItems)
-window.historyItems = JSON.parse(localStorage.historyItems)
+    { title: '维基百科', time: NOW - DAYINMS },
+    { title: 'Google', time: NOW - DAYINMS },
+    { title: '銀翼殺手2049', time: NOW - DAYINMS },
+    { title: '辽太宗', time: NOW - DAYINMS },
+    { title: '二进制', time: NOW - DAYINMS },
+    { title: '木星', time: NOW - DAYINMS },
+    { title: '公开密钥加密', time: NOW - DAYINMS },
 
+    { title: '时间复杂度', time: NOW - 10000 },
+    { title: 'JavaScript', time: NOW - 10000 },
+]
 
-/* 
-let openReq = indexedDB.open('wikipedia')
-openReq.onupgradeneeded = function (e) {
-    console.log('idb: open onupgradeneeded')
-    window.db = e.target.result
-    var db = window.db
-    if (!db.objectStoreNames.contains("savedItems")) {
-        db.createObjectStore('savedItems', { autoIncrement: 'value' })
-    }
-    if (!db.objectStoreNames.contains("historyItems")) {
-        let store = db.createObjectStore('historyItems', { autoIncrement: 'value' })
-        store.createIndex('title', 'title',)
-    }
-}
-openReq.onsuccess = function (e) {
-    console.log('idb: open success')
-    let db = window.db = e.target.result
-    let store = db.transaction('historyItems', 'readwrite').objectStore('historyItems')
+const explored = [
+    // random，picture，topRead, becauseURead
 
-    // window.historyItems.forEach((title) => {
-    //     store.add(title)
-    // });
+    { type: 'random', time: NOW - DAYINMS * 10, title: '鹳科' },
+    { type: 'random', time: NOW - DAYINMS * 2, title: '異特龍屬的種' },
+    { type: 'random', time: NOW - DAYINMS, title: '诺伊许滕' },
+    { type: 'random', time: NOW - 3600 * 1000, title: '帽柱木属' },
+]
 
-    store.index('title').getAll("时间复杂度").onsuccess=(e)=>{
-        console.log('idb', e.target.result)
-    }
-
-}
-
- */
 
 window.loadTestDataToIndexDB = function () {
-    let db = new Dexie("wikipedia")
-    db.version(1).stores({
-        historyItems: "++, &title, time",
-        savedItems: "++, &title"
-    });
-    db.open()
+    Dexie.delete('wikipedia').then(() => {
+        const db = new Dexie("wikipedia")
+        db.version(1).stores(tableStruct);
+        db.open()
+        db.historyItems.bulkPut(historyItems)
+            .catch((e) => console.log('bulkAdd fail'))
+        db.savedItems.bulkPut(savedItems)
+            .catch((e) => console.log('bulkAdd fail'))
+        db.explored.bulkPut(explored)
+            .catch((e) => console.log('bulkAdd fail'))
 
-
-    db.historyItems.bulkAdd(window.historyItems)
-        .then(() => console.log('bulkAdd success'))
-        .catch((e) => console.log('bulkAdd fail', e))
-
-    db.savedItems.bulkAdd(window.savedItems)
-        .then(() => console.log('bulkAdd success'))
-        .catch((e) => console.log('bulkAdd fail', e))
-
-    // db.close()
+        setTimeout(() => { window.location.reload() }, 100)
+    }).catch((e) => { console.error(e) })
 }
 // loadTestDataToIndexDB()
 
+// db.savedItems.add({ title: "before delete Google"})
+//     .catch((e) => console.log(' fail', e))
 
+/* 
 let db = new Dexie("wikipedia")
 db.version(1).stores({
     historyItems: "++, &title, time",
@@ -115,10 +89,9 @@ db.open()
 
 db.historyItems.where("title").equals("Google").delete()
     .catch((e) => console.log(' fail', e))
-db.historyItems.add({ title: "Google", time: 15 })
-    .catch((e) => console.log(' fail', e))
-db.savedItems.where("title").equals("Google").delete()
 
+db.savedItems.where("title").equals("Google").delete()
+ */
 
 
 

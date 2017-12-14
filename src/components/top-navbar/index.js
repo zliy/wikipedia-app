@@ -2,10 +2,6 @@ import React from "react"
 import ICONS from '@/icon/'
 
 class TopNavBar extends React.Component {
-    constructor(props) {
-        super(props)
-
-    }
 
     render() {
         const {

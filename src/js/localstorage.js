@@ -1,4 +1,4 @@
-import store from '@/store'
+
 import { get, WIKIURL } from '@/js/fetch'
 
 export function storageSavedToState() {

@@ -12,9 +12,7 @@ import get from '@/js/fetch'
 let scroll = 0
 
 class Saved extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+
     componentWillMount() {
     }
     componentDidMount() {

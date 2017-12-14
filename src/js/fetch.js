@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import db from '@/js/db'
 
 /**
  * @param {string} keyword
@@ -8,23 +9,20 @@ import _ from 'lodash'
 export function get(keyword, url) {
     switch (url) {
         case WIKIURL.SUMMARY: {
-            if (_.get(window, [''])) {
-                return new Promise((resolve, reject) => {
-                    resolve(window.fakeCache.summary[keyword])
-                })
-            } else {
-                console.log('fetch summary:', keyword)
+            return db.httpCache.get({ title: keyword }).then((item) => {
+                if (item) {
+                    return Promise.resolve(item)
+                }
                 return fetch(WIKIURL.SUMMARY(keyword)).then((resp) => resp.json())
                     .then(json => {
-                        _.set(window, ['fakeCache', 'summary', keyword], json)
-                        localStorage.HTTP_CACHE = JSON.stringify(window.fakeCache)
+                        db.httpCache.put(json).catch((e) => { console.error(e) })
                         return json
                     })
-            }
+            })
             break;
         }
         default:
-            console.log('error：get default')
+            console.error('error：get default')
     }
 }
 

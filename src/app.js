@@ -4,21 +4,19 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 
 import store from '@/store'
 
-import Explore from '@/explore/'
+import { View as Explore } from '@/explore/'
 import { View as Saved } from '@/saved/'
 import { View as History } from '@/history/'
 import Wiki from '@/wiki/'
 import Settings from "@/settings/"
 
-import { storageSavedToState } from '@/js/localstorage'
 class App extends React.Component {
-    constructor(props) {
-        super(props)
 
-    }
     componentWillMount() {
-        // this.props.initSaved()
-        // store.dispatch(storageSavedToState())
+
+        store.dispatch({ type: 'EXPLORE/LOAD_LOCAL' })
+        store.dispatch({ type: 'SAVED/LOAD_LOCAL' })
+        store.dispatch({ type: 'HISTORY/LOAD_LOCAL' })
         console.log('👉 componentWillMount')
     }
 
@@ -37,9 +35,5 @@ class App extends React.Component {
         )
     }
 }
-function mapDispatch(dispatch) {
-    return {
-        initSaved: () => dispatch({ type: 'SAVED/INIT_STATE' }),
-    }
-}
+
 export default App
