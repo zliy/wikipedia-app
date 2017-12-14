@@ -4,10 +4,7 @@ import TopNavBar from '@cpt/top-navbar/'
 import BottomNavBar from '@cpt/bottom-navbar/'
 
 export default class extends React.Component {
-    constructor(props) {
-        super(props)
-        console.log(props)
-    }
+
 
     render() {
         return (
