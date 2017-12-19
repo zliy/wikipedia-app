@@ -68,6 +68,8 @@ module.exports = function(proxy, allowedHost) {
     // src/node_modules is not ignored to support absolute imports
     // https://github.com/facebookincubator/create-react-app/issues/1065
     watchOptions: {
+      aggregateTimeout: 2000,
+      // poll: 5000,
       ignored: new RegExp(
         `^(?!${path
           .normalize(paths.appSrc + '/')

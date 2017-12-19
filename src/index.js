@@ -23,4 +23,5 @@ ReactDOM.render(
 // eslint-disable-next-line
 // setTimeout(() => { if (location.pathname !== '/saved') location.replace('/saved') }, 1000)
 
+window.oncontextmenu = function() { return false; }
 window.store = store

@@ -5,15 +5,15 @@ import WikiListItem from '../wiki-list-item'
 export default class extends React.Component {
 
     render() {
-        const { items, children } = this.props
+        const { items, children, onTouchStart, onTouchEnd ,onTouchMove} = this.props
 
         return (
-            <div className="wiki-list">
+            <div className="wiki-list" {...{ onTouchStart, onTouchEnd,onTouchMove }}>
                 {children ? <div className="listtitle">{children}</div> : ''}
                 <ul>
                     {
                         items.map((item) => {
-                            return <WikiListItem key={item.title} {...{ ...item }}></WikiListItem>
+                            return <WikiListItem liID={item.title} key={item.title} {...item }></WikiListItem>
                         })
                     }
                 </ul>

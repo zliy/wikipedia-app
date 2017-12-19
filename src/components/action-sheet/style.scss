@@ -1,0 +1,50 @@
+.action-sheet {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    color: blue;
+    font-size: 20px;
+    .action-sheet-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin: 10px;
+        .action-sheet-button.active {
+            background-color: #ddd;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #fff;
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 52px;
+                border-bottom: 0.5px solid #ccc;
+                &:last-child {
+                    border: none;
+                }
+            }
+        }
+        .action-sheet-cancel {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+            margin-top: 10px; 
+            justify-content: center;
+            height: 52px;
+        }
+    }
+}

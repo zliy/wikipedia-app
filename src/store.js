@@ -15,8 +15,8 @@ const routerMW = routerMiddleware(history)
 
 const rootReducer = combineReducers({
     rotuer: routerReducer,
-    savedItems: savedReducer,
-    historyItems: historyReducer,
+    saved: savedReducer,
+    history: historyReducer,
     explored: exploreReducer
     // historyWikisContent, // 返回时直接加载页面数据
 })

@@ -6,7 +6,7 @@ import {
 
 export default function (props) {
     const { title, displayTitle, description, extract, thumbnail,
-        noborder, } = props
+        noborder, liID } = props
     const thumbSrc = thumbnail && thumbnail.source
     const classSet = classNames({
         border: !noborder,
@@ -14,7 +14,7 @@ export default function (props) {
     })
 
     return (
-        <li className={classSet} >
+        <li className={classSet} data-liid={liID}>
             <Link to={'/wiki/' + title}>
                 <section>
                     <h4>{title}</h4>
