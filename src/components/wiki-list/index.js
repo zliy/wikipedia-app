@@ -5,10 +5,9 @@ import WikiListItem from '../wiki-list-item'
 export default class extends React.Component {
 
     render() {
-        const { items, children, onTouchStart, onTouchEnd ,onTouchMove} = this.props
-
+        const { items, children, ...restProps} = this.props
         return (
-            <div className="wiki-list" {...{ onTouchStart, onTouchEnd,onTouchMove }}>
+            <div className="wiki-list" {...restProps}>
                 {children ? <div className="listtitle">{children}</div> : ''}
                 <ul>
                     {

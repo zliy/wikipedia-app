@@ -22,10 +22,12 @@ export default class extends React.Component {
         let isRealClick = false
         this.mouseMoveOver = null
         return (
-            <div className='action-sheet'>
+            <div className='action-sheet' 
+                onTouchStart={()=>{ isRealClick = true}}
+                onClick={(e)=>{ isRealClick && cancelHandler()}}
+            >
                 <div className="action-sheet-content"
                     onTouchStart={(e) => {
-                        isRealClick = true
                         let currOverBtn = e.target.closest('.action-sheet-button')
                         currOverBtn && currOverBtn.classList.add('active')
                     }}

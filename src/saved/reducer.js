@@ -29,7 +29,7 @@ export default function (state = { actTargetID: null }, action) {
             }
         }
         case 'SAVED/CLEAR': {
-            db.savedItems.clear()
+            // db.savedItems.clear()
             return {
                 ...state,
                 savedItems: []

@@ -7,6 +7,7 @@ import WikiListItem from '@cpt/wiki-list-item'
 
 import WikiList from '@cpt/wiki-list/'
 import ActionSheet from '@cpt/action-sheet/'
+import LongPress from '@cpt/longpress/'
 
 import get from '@/js/fetch'
 import { LONTPRESSTIMEOUT } from '@/constants'
@@ -27,7 +28,7 @@ class Saved extends React.Component {
     }
 
     render() {
-        this.lpTimeoutID = null
+
         console.log('saved rendered')
         const { savedItems, actTargetID,
             showActions, cancelActions, deleteItems, clearAll } = this.props
@@ -43,16 +44,13 @@ class Saved extends React.Component {
                     onTitleClick={() => location.reload()}
                 >Saved</TopNavBar>
 
-
-                <WikiList items={savedItems}
-                    onTouchStart={(e) => {
-                        /* note: e在timeout之后没有信息， */
-                        const targetLi = e.target.closest('li')
-                        this.lpTimeoutID = setTimeout(showActions, LONTPRESSTIMEOUT, targetLi)
-                    }}
-                    onTouchEnd={(e) => { clearTimeout(this.lpTimeoutID); this.lpTimeoutID = null }}
-                    onTouchMove={(e) => { clearTimeout(this.lpTimeoutID); this.lpTimeoutID = null }}
-                ></WikiList>
+                <LongPress handler={(t) => {
+                    let li = t.closest('li.wiki-list-item')
+                    console.log(li)
+                    li && showActions(li)
+                }}>
+                    <WikiList items={savedItems}></WikiList>
+                </LongPress>
 
 
                 {actTargetID && <ActionSheet cancelHandler={cancelActions}
@@ -61,7 +59,7 @@ class Saved extends React.Component {
                         { title: '删除', fontColor: 'red', handler: () => { deleteItems(actTargetID) }, }
                     ]}></ActionSheet>}
 
-                    
+
                 <BottomNavBar></BottomNavBar>
             </main >
         )
@@ -94,7 +92,7 @@ function mapDispatch(dispatch) {
         deleteItems: (title) => {
             dispatch({ type: 'SAVED/DELETEITEM', payload: { delTitles: [title] } })
         },
-        clearAll: (title) => {
+        clearAll: () => {
             dispatch({ type: 'SAVED/CLEAR' })
         }
     }
