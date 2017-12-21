@@ -4,17 +4,24 @@ import { connect } from 'react-redux'
 import TopNavBar from '@cpt/top-navbar/'
 import BottomNavBar from '@cpt/bottom-navbar/'
 import Card from '@cpt/card/'
+import * as Cards from '@cpt/typedcards/'
+
 
 import { CARDTYPE } from '@/constants'
+
+
+
+
+
 
 let scroll = 0
 
 class Explore extends React.Component {
     componentWillUnmount() {
-        scroll = window.scrollY        
+        scroll = window.scrollY
     }
-    componentDidMount(){
-        window.scroll(0, scroll)        
+    componentDidMount() {
+        window.scroll(0, scroll)
     }
     render() {
         console.log('explore rendered')
@@ -35,25 +42,18 @@ class Explore extends React.Component {
                             case CARDTYPE.RANDOM: {
                                 const summary = aCard.summary
                                 return (
-                                    <Card>
-                                        {/* note: Cpt.child */}
-                                        <Card.header
-                                            subtitle="Random article"
-                                            title="Wikipedia"
-                                        ></Card.header>
-                                        <Card.body
-                                            imgSrc={summary.originalimage.source}
-                                            description={summary.description || summary.extract}
-                                            title={summary.title}
-                                        >
-                                        </Card.body>
-                                        <Card.footer />
-
-                                    </Card>
+                                    <Cards.Random key={aCard.type + summary.title}
+                                        summary={summary}
+                                    />
                                 )
                             }
-                            case CARDTYPE.RANDOM:
-                                const summary = 1
+                            // case CARDTYPE.BECAUSEUREAD: {
+                            //     return (
+                            //         <Cards.BeacuseURead></Cards.BeacuseURead>
+                            //     )
+                            // }
+                            default:
+                                throw new Error('unknown Card type')
 
                         }
                     })
@@ -67,7 +67,7 @@ class Explore extends React.Component {
 
 function mapState(state) {
     return {
-        explored: state.explored
+        explored: state.explore.explored || []
     }
 }
 

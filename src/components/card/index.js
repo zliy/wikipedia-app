@@ -1,5 +1,14 @@
 import React from 'react'
 
+export const SaveForLater = ({ saved }) => {
+    return (
+        <div>
+            <input type="checkbox" checked={saved} />Save for Latter
+        </div>
+    );
+};
+
+
 class Card extends React.Component {
     render() {
         const { children } = this.props
@@ -34,6 +43,7 @@ Card.body = function (props) {
                     {title && <h2>{title}</h2>}
                     {description && <p>{description}</p>}
                 </div> : ''}
+                <SaveForLater saved></SaveForLater>
         </div>
     )
 }
