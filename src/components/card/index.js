@@ -43,11 +43,11 @@ Card.body = function (props) {
                     {title && <h2>{title}</h2>}
                     {description && <p>{description}</p>}
                 </div> : ''}
-                <SaveForLater saved></SaveForLater>
         </div>
     )
 }
 Card.footer = function (props) {
+    let  {} = props
     return (
         <footer>
             Another footer todo

@@ -1,27 +1,5 @@
-import React from 'react'
+import View from './wiki'
+import reducer from './reducer'
+import * as actions from './actions'
 
-import TopNavBar from '@cpt/top-navbar/'
-import BottomNavBar from '@cpt/bottom-navbar/'
-
-export default class extends React.Component {
-
-
-    render() {
-        return (
-            <main className="wiki">
-                <TopNavBar fixed
-                    iconLeft={TopNavBar.i.back}
-                    leftContent="Back"
-                    iconRight={TopNavBar.i.search}
-                    // eslint-disable-next-line
-                    onLeftClick={()=>history.back()}
-                >W</TopNavBar>
-                这是一篇wiki文章
-            <br />
-                path: {this.props.match.url}
-
-
-            </main>
-        )
-    }
-}
+export { View, reducer, actions}

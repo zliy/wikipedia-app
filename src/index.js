@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter, push } from 'react-router-redux'
 
 import '@/style.scss'
+import '@/wikipedia.scss'
 import store, { history } from '@/store.js'
 import App from '@/app'
 

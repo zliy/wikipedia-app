@@ -22,7 +22,7 @@ export default function (props) {
                 </section>
                 {thumbSrc ? <div style={{ "backgroundImage": `url('${thumbSrc}')` }} /> : ''}
             </Link>
-        </li >
+        </li>
     )
 }
 

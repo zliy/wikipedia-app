@@ -2,7 +2,7 @@ export const CARDTYPE = {
     RANDOM: 'random',
     PICTURE: 'picture',
     TOPREAD: 'topRead',
-    BECAUSEUREAD: 'becauseURead',
+    MORELIKE: 'moreLike',
 }
 
 export const LONTPRESSTIMEOUT = 400

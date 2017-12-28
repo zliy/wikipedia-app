@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Card from '@cpt/card/'
 import WikiList from '@cpt/wiki-list/'
 
+import mapTime from '@/js/mapTime'
 const SummaryShape = PropTypes.shape({
     title: PropTypes.string.isRequired,
     extract: PropTypes.string.isRequired,
@@ -35,14 +36,14 @@ Random.propTypes = {
 
 export class TopRead extends React.Component {
     render() {
-        const { time, items } = this.props
+        const { date, items } = this.props
         return (
             <Card>
                 <Card.header
                     subtitle="Top read on Chinese Wikipedia"
-                    title={time}
+                    title={date}
                 ></Card.header>
-                <WikiList items={items} />
+                <WikiList items={items} noborder />
                 <Card.footer />
             </Card>
         )
@@ -56,18 +57,18 @@ TopRead.propTypes = {
 
 
 
-export class BeacuseURead extends React.Component {
+export class MoreLike extends React.Component {
     render() {
         const { time, summary, items } = this.props
         return (
             <Card>
-                <Card.header subtitle="Because you read" title={time} />
+                <Card.header subtitle="Because you read" title={mapTime(time).readableTime} />
                 <Card.body
                     imgSrc={summary.originalimage.source}
                     description={summary.description || summary.extract}
                     title={summary.title}
                 />
-                <WikiList items={items.slice(0, 3)} />
+                <WikiList items={items.slice(0, 3)} noborder />
 
                 <Card.footer />
 
@@ -76,7 +77,7 @@ export class BeacuseURead extends React.Component {
     }
 }
 
-BeacuseURead.propTypes = {
+MoreLike.propTypes = {
     time: PropTypes.number, // readable time
     summary: SummaryShape,
     items: PropTypes.arrayOf(SummaryShape),

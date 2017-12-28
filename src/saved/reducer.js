@@ -6,7 +6,6 @@ import db from '@/js/db'
 export default function (state = { actTargetID: null }, action) {
     switch (action.type) {
         case 'SAVED/LOAD_LOCAL': {
-            store.dispatch(loadLocal())
             return state
         }
         case 'SAVED/LOCAL_LOADED': {
@@ -54,21 +53,3 @@ export default function (state = { actTargetID: null }, action) {
             return state;
     }
 }
-
-/* example state */
-const state = {
-
-
-    saved: {   // this is state
-        actTargetID: 'titleString',
-        savedItems: [
-            {},
-            {},
-            // summarys
-        ]
-    }
-
-
-
-}
-

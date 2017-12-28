@@ -51,12 +51,16 @@ const historyItems = [
 ]
 
 const explored = [
-    // random，picture，topRead, becauseURead
+    // random，picture，topRead, moreLike
 
     { type: 'random', time: NOW - DAYINMS * 10, title: '鹳科' },
     { type: 'random', time: NOW - DAYINMS * 2, title: '異特龍屬的種' },
+    { type: 'topRead', time: NOW - DAYINMS - 1000, date:'20171223' },
+    { type: 'moreLike', time: NOW - DAYINMS - 1000, title: '帽柱木属' },
     { type: 'random', time: NOW - DAYINMS, title: '诺伊许滕' },
     { type: 'random', time: NOW - 3600 * 1000, title: '帽柱木属' },
+    { type: 'topRead', time: NOW - DAYINMS - 1000, date:'20171224' },
+    
 ]
 
 

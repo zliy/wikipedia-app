@@ -1,5 +1,4 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import store from '@/store'
@@ -7,17 +6,20 @@ import store from '@/store'
 import { View as Explore } from '@/explore/'
 import { View as Saved } from '@/saved/'
 import { View as History } from '@/history/'
-import Wiki from '@/wiki/'
+import { View as Wiki } from '@/wiki/'
 import Settings from "@/settings/"
 
+import { actions as exploreActs } from '@/explore/'
+import { actions as savedActs } from '@/saved/'
+import { actions as historyActs } from '@/history/'
+
+
+
 class App extends React.Component {
-
     componentWillMount() {
-
-        store.dispatch({ type: 'EXPLORE/LOAD_LOCAL' })
-        store.dispatch({ type: 'SAVED/LOAD_LOCAL' })
-        store.dispatch({ type: 'HISTORY/LOAD_LOCAL' })
-        console.log('👉 componentWillMount')
+        store.dispatch(exploreActs.loadLocal())
+        store.dispatch(savedActs.loadLocal())
+        store.dispatch(historyActs.loadLocal())
     }
 
     render() {

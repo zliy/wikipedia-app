@@ -47,13 +47,27 @@ class Explore extends React.Component {
                                     />
                                 )
                             }
-                            // case CARDTYPE.BECAUSEUREAD: {
-                            //     return (
-                            //         <Cards.BeacuseURead></Cards.BeacuseURead>
-                            //     )
-                            // }
+                            case CARDTYPE.MORELIKE: {
+                                const { summary, time, items } = aCard
+                                return (
+                                    <Cards.MoreLike key={aCard.type + summary.title}
+                                        time={time}
+                                        summary={summary}
+                                        items={items}
+                                    />
+                                )
+                            }
+                            case CARDTYPE.TOPREAD: {
+                                const { date, items } = aCard
+                                return (
+                                    <Cards.TopRead key={aCard.type + date}
+                                        date={date}
+                                        items={items.slice(0,5)}
+                                    />
+                                )
+                            }
                             default:
-                                throw new Error('unknown Card type')
+                                throw new Error('unknown Card type: ' + aCard.type)
 
                         }
                     })

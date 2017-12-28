@@ -9,6 +9,7 @@ import logger from "redux-logger"
 import { reducer as savedReducer } from '@/saved'
 import { reducer as historyReducer } from '@/history'
 import { reducer as exploreReducer } from '@/explore'
+import { reducer as wikiReducer } from '@/wiki'
 
 export const history = createHistory()
 const routerMW = routerMiddleware(history)
@@ -17,10 +18,13 @@ const rootReducer = combineReducers({
     rotuer: routerReducer,
     saved: savedReducer,
     history: historyReducer,
-    explore: exploreReducer
+    explore: exploreReducer,
+    wiki: wikiReducer,
     // historyWikisContent, // 返回时直接加载页面数据
 })
 
 
 const mwS = applyMiddleware(routerMW, thunk, logger)
 export default createStore(rootReducer, composeWithDevTools(mwS))
+
+

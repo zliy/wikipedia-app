@@ -23,7 +23,6 @@ class Saved extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log('saved: componentWillUnmount')
         scroll = window.scrollY
     }
 
