@@ -3,7 +3,7 @@ import './fakeData'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { ConnectedRouter, push } from 'react-router-redux'
+import { BrowserRouter } from 'react-router-dom'
 
 import '@/style.scss'
 import '@/wikipedia.scss'
@@ -13,9 +13,9 @@ import App from '@/app'
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <BrowserRouter>
       <App></App>
-    </ConnectedRouter>
+    </BrowserRouter>
   </Provider>
 
   , document.getElementById('root'))
@@ -24,5 +24,6 @@ ReactDOM.render(
 // eslint-disable-next-line
 // setTimeout(() => { if (location.pathname !== '/saved') location.replace('/saved') }, 1000)
 
-window.oncontextmenu = function() { return false; }
+window.oncontextmenu = function () { return false; }
 window.store = store
+localStorage.debug = '⭐️Wiki:'

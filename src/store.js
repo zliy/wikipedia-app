@@ -1,6 +1,5 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
-import { routerReducer, routerMiddleware } from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
+
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import thunk from 'redux-thunk'
@@ -11,11 +10,10 @@ import { reducer as historyReducer } from '@/history'
 import { reducer as exploreReducer } from '@/explore'
 import { reducer as wikiReducer } from '@/wiki'
 
-export const history = createHistory()
-const routerMW = routerMiddleware(history)
+
+
 
 const rootReducer = combineReducers({
-    rotuer: routerReducer,
     saved: savedReducer,
     history: historyReducer,
     explore: exploreReducer,
@@ -24,7 +22,7 @@ const rootReducer = combineReducers({
 })
 
 
-const mwS = applyMiddleware(routerMW, thunk, logger)
+const mwS = applyMiddleware( thunk, logger)
 export default createStore(rootReducer, composeWithDevTools(mwS))
 
 

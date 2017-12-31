@@ -11,8 +11,34 @@ $top-navbar-height: 46px;
 @import './components/wiki-list/style.scss';
 @import './components/card/style.scss';
 @import './components/action-sheet/style.scss';
-
-
-main.explore{
+main.explore {
     flex-direction: column;
+}
+
+.wiki.push-enter {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transform: translateX(100%);
+    z-index: 99999;
+    box-shadow: -8px 0px 20px 0px #b9b9b9;
+}
+
+.wiki.push-enter-active {
+    transform: translateX(0%);
+    transition: transform 300ms;
+}
+
+.wiki.pop-leave {
+    transform: translateX(0%);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+    box-shadow: -8px 0px 20px 0px #b9b9b9;
+}
+
+.wiki.pop-leave-active {
+    transform: translateX(100%);
+    transition: transform 300ms;
 }

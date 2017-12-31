@@ -13,25 +13,38 @@ export function get(keyword, url) {
 
 
     switch (url) {
+        // case WIKIURL.SUMMARY: {
+        //     return db.summaryCache.get({ title: keyword }).then((item) => {
+        //         if (item) {
+        //             return Promise.resolve(item)
+        //         }
+        //         const request = new Request(WIKIURL.SUMMARY(keyword))
+        //         return fetch(request, { headers }).then((resp) => resp.json())
+        //             .then(json => {
+        //                 db.summaryCache.put(json).catch((e) => { console.error(e) })
+        //                 return json
+        //             })
+        //     })
+        // }
         case WIKIURL.SUMMARY: {
-            return db.summaryCache.get({ title: keyword }).then((item) => {
-                if (item) {
-                    return Promise.resolve(item)
+            return (async function () {
+                let cachedItem = await db.summaryCache.get({ title: keyword })
+                if (cachedItem) {
+                    return cachedItem
                 }
                 const request = new Request(WIKIURL.SUMMARY(keyword))
-                return fetch(request,{headers}).then((resp) => resp.json())
-                    .then(json => {
-                        db.summaryCache.put(json).catch((e) => { console.error(e) })
-                        return json
-                    })
-            })
+                let resp = await fetch(request, { headers })
+                let json = await resp.json()
+                db.summaryCache.put(json).catch((e) => { console.error(e) })
+                return json
+            })()
         }
         case WIKIURL.MORELIKE: {
             return db.moreLikeCache.get({ title: keyword }).then((item) => {
                 if (item) {
                     return Promise.resolve(item.data)
                 }
-                
+
                 return fetch(WIKIURL.MORELIKE(keyword)).then((resp) => resp.json())
                     .then(json => {
 
@@ -46,7 +59,7 @@ export function get(keyword, url) {
                     return Promise.resolve(item.data)
                 }
                 const request = new Request(WIKIURL.TOPREAD(keyword))
-                return fetch(request,{headers}).then((resp) => resp.json())
+                return fetch(request, { headers }).then((resp) => resp.json())
                     .then(json => {
                         db.topReadandPicCache.put({ date: keyword, data: json }).catch((e) => { console.error(e) })
                         return json
@@ -55,13 +68,13 @@ export function get(keyword, url) {
         }
 
         case WIKIURL.CONTENT: {
-            
+
             return db.wikiContentCache.get({ title: keyword }).then((item) => {
                 if (item) {
                     return Promise.resolve(item.data)
                 }
                 const request = new Request(WIKIURL.CONTENT(keyword))
-                return fetch(request,{headers}).then((resp) => resp.json())
+                return fetch(request, { headers }).then((resp) => resp.json())
                     .then(json => {
                         db.wikiContentCache.put({ title: keyword, data: json }).catch((e) => { console.error(e) })
                         return json

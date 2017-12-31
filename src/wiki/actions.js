@@ -13,7 +13,7 @@ export function fetchContent(title) {
         dispatch({ type: "WIKI/LOADING_CONTENT" })
 
         return get(title, WIKIURL.CONTENT).then((json) => {
-            dispatch({ type: "WIKI/CONTENT_LOADED", payload: json.mobileview })
+            dispatch({ type: "WIKI/CONTENT_LOADED", payload: { [title]: json.mobileview } })
         })
     }
 }

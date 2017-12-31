@@ -10,7 +10,10 @@ export default function (state = {}, action) {
         case 'WIKI/CONTENT_LOADED': {
             return {
                 ...state,
-                content: action.payload,
+                contents: {
+                    ...(state.contents ? state.contents : {}),
+                    ...action.payload,
+                }
             }
         }
         default:

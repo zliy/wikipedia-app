@@ -28,7 +28,7 @@ class Saved extends React.Component {
 
     render() {
 
-        console.log('saved rendered')
+        // console.log('saved rendered')
         const { savedItems, actTargetID,
             showActions, cancelActions, deleteItems, clearAll } = this.props
         return (
