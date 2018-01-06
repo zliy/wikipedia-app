@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import Card from '@cpt/card/'
+import _ from 'lodash'
+import Card, { SaveForLater } from '@cpt/card/'
 import WikiList from '@cpt/wiki-list/'
 
 import mapTime from '@/js/mapTime'
@@ -14,22 +14,26 @@ const SummaryShape = PropTypes.shape({
 
 export class Random extends React.Component {
     render() {
-        const { summary } = this.props
+        const { summary, isSaved,
+            toggleSave, } = this.props
         return (
             <Card>
                 <Card.header subtitle="Random article" title="Wikipedia" />
                 <Card.body
-                    imgSrc={summary.originalimage.source}
+                    imgSrc={_.get(summary, 'thumbnail.source')} //_.get(summary, 'originalimage.source') ||
                     description={summary.description || summary.extract}
                     title={summary.title}
-                />
-                <Card.footer />
+                >
+                    <SaveForLater saved={isSaved} onClick={() => { toggleSave(summary.title) }} />
+                </Card.body>
+                {/* <Card.footer /> */}
             </Card>
         )
     }
 }
 Random.propTypes = {
     summary: SummaryShape,
+    isSaved: PropTypes.bool.isRequired,
 }
 
 

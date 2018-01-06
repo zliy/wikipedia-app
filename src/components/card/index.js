@@ -1,12 +1,15 @@
 import React from 'react'
 
-export const SaveForLater = ({ saved }) => {
+export const SaveForLater = ({ saved, ...restProps }) => {
     return (
-        <div>
-            <input type="checkbox" checked={saved} />Save for Latter
+        <div style={{ color: "blue", }} {...restProps} >
+            {saved ? <i className="fa fa-bookmark" aria-hidden="true"></i>
+                : <i className="fa fa-bookmark-o" aria-hidden="true"></i>}
+            {saved ? "已收藏此条目" : "收藏此条目"}
         </div>
-    );
-};
+
+    )
+}
 
 
 class Card extends React.Component {
@@ -19,6 +22,7 @@ class Card extends React.Component {
         )
     }
 }
+
 Card.header = function (props) {
     const { title, subtitle, thumb } = props
     return (
@@ -31,8 +35,9 @@ Card.header = function (props) {
         </header>
     )
 }
+
 Card.body = function (props) {
-    const { imgSrc, title, description, save } = props
+    const { imgSrc, title, description, children, } = props
     return (
         <div className="card-body">
             {imgSrc ?
@@ -42,16 +47,19 @@ Card.body = function (props) {
                 <div className="card-body-content">
                     {title && <h2>{title}</h2>}
                     {description && <p>{description}</p>}
+                    {children}
                 </div> : ''}
         </div>
     )
 }
+
 Card.footer = function (props) {
-    let  {} = props
+    let { } = props
     return (
         <footer>
             Another footer todo
         </footer>
     )
 }
+
 export default Card

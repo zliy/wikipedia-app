@@ -6,6 +6,7 @@ export default class extends React.Component {
 
     render() {
         const { items, children, noborder, ...restProps} = this.props
+        // debugger
         return (
             <div className="wiki-list" {...restProps}>
                 {children ? <div className="listtitle">{children}</div> : ''}

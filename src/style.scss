@@ -4,6 +4,7 @@ $top-navbar-height: 46px;
     box-shadow: 0 0 0 0.5px #00bb00;
 }
 
+@import './font-awesome/scss/font-awesome.scss';
 @import './reset.scss';
 @import './components/bottom-navbar/style.scss';
 @import './components/top-navbar/style.scss';
@@ -11,34 +12,12 @@ $top-navbar-height: 46px;
 @import './components/wiki-list/style.scss';
 @import './components/card/style.scss';
 @import './components/action-sheet/style.scss';
-main.explore {
-    flex-direction: column;
-}
 
-.wiki.push-enter {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    transform: translateX(100%);
-    z-index: 99999;
-    box-shadow: -8px 0px 20px 0px #b9b9b9;
-}
+@import './pages/explore/style.scss';
+@import './pages/wiki/style.scss';
+@import './pages/settings/style.scss';
 
-.wiki.push-enter-active {
-    transform: translateX(0%);
-    transition: transform 300ms;
-}
 
-.wiki.pop-leave {
-    transform: translateX(0%);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 99999;
-    box-shadow: -8px 0px 20px 0px #b9b9b9;
-}
 
-.wiki.pop-leave-active {
-    transform: translateX(100%);
-    transition: transform 300ms;
-}
+
+

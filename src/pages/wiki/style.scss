@@ -1,0 +1,49 @@
+.wiki {
+    min-height: 100vh;
+    background-color: white;
+    .loading {
+        display: flex;
+        
+        justify-content: center;
+        align-items: center;
+        height: 500px;
+    }
+}
+
+@mixin trans-time {
+    transition-duration: 200ms;
+}
+
+.wiki {
+    &.push-enter {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        transform: translateX(100%);
+        z-index: 10000;
+    }
+    &.push-enter-active {
+        transform: translateX(0%);
+        box-shadow: -8px 0px 20px 0px #b9b9b9;
+        transition-property: transform, box-shadow;
+        @include trans-time;
+    }
+    // &.pop-enter {
+    //     position: absolute;
+    //     width: 100%;
+    // }
+    &.pop-leave {
+        transform: translateX(0%); // position: fixed;
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        z-index: 10000;
+        box-shadow: -8px 0px 20px 0px #b9b9b9;
+    }
+    &.pop-leave-active {
+        transform: translateX(100%);
+        box-shadow: none;
+        @include trans-time;
+        transition-property: transform, box-shadow;
+    }
+}

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import '@/style.scss'
-import '@/wikipedia.scss'
+import '@/pages/wiki/wikipedia.scss'
 import store, { history } from '@/store.js'
 import App from '@/app'
 

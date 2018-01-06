@@ -5,10 +5,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 import logger from "redux-logger"
 
-import { reducer as savedReducer } from '@/saved'
-import { reducer as historyReducer } from '@/history'
-import { reducer as exploreReducer } from '@/explore'
-import { reducer as wikiReducer } from '@/wiki'
+import { reducer as savedReducer } from '@/pages/saved'
+import { reducer as historyReducer } from '@/pages/history'
+import { reducer as exploreReducer } from '@/pages/explore'
+import { reducer as wikiReducer } from '@/pages/wiki'
 
 
 
