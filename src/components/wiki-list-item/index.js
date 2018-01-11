@@ -1,5 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+
 import {
     Link,
 } from 'react-router-dom'
@@ -26,4 +28,12 @@ export default function (props) {
     )
 }
 
+
+export function Collapse({ children, ...props }) {
+    return (
+        <CSSTransition timeout={300} {...props}  classNames="collapse">
+            {children}
+        </CSSTransition>
+    )
+}
 

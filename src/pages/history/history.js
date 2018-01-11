@@ -1,9 +1,11 @@
 import React from "react"
 import { connect } from "react-redux"
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import TopNavBar from "@cpt/top-navbar/index.js"
 import BottomNavBar from '@cpt/bottom-navbar/'
 import WikiList from '@cpt/wiki-list/'
+import { Collapse } from '@cpt/wiki-list-item/'
 import LongPress from '@cpt/longpress/'
 
 import mapTime from '@/js/mapTime'
@@ -27,7 +29,7 @@ class History extends React.Component {
     render() {
         this.longPressTimeoutID = null
         const { historyGroups, actTargetID,
-            showActions, cancelActions, deleteItems, clearAll} = this.props
+            showActions, cancelActions, deleteItems, clearAll } = this.props
         return (
             <main>
                 <TopNavBar
@@ -40,19 +42,24 @@ class History extends React.Component {
                 >History</TopNavBar>
 
 
-                {historyGroups.map(group => {
-                    return (
-                        <LongPress key={group.readableTime} handler={(t) => {
-                            let li = t.closest('li.wiki-list-item')
-                            console.log(li)
-                            li && showActions(li)
-                        }}>
-                            <WikiList items={group.data} >
-                                {group.readableTime}
-                            </WikiList>
-                        </LongPress>
-                    )
-                })}
+                <TransitionGroup>
+                    {historyGroups.map(group => {
+                        return (
+                            <Collapse key={group.readableTime} timeout={3000}>
+                                <LongPress handler={(t) => {
+                                    let li = t.closest('li.wiki-list-item')
+                                    console.log(li)
+                                    li && showActions(li)
+                                }}>
+                                    <WikiList items={group.data} >
+                                        {group.readableTime}
+                                    </WikiList>
+                                </LongPress>
+                            </Collapse>
+                        )
+                    })}
+                </TransitionGroup>
+
 
 
                 {actTargetID && <ActionSheet cancelHandler={cancelActions}

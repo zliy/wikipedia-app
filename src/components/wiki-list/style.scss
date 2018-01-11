@@ -12,3 +12,15 @@
         background-color: #fff;
     }
 }
+
+.wiki-list.collapse-exit {
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+.wiki-list.collapse-exit-active {
+    transition-property: transform, margin-bottom;
+    transition-duration: 3000ms;
+    transform: scaleY(0);
+    margin-bottom: -117px;
+}

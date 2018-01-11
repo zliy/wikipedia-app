@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+
 
 
 
@@ -15,7 +15,7 @@ import Settings from "@/pages/settings/"
 import { actions as exploreActs } from '@/pages/explore/'
 import { actions as savedActs } from '@/pages/saved/'
 import { actions as historyActs } from '@/pages/history/'
-import { transitionTimeout } from 'react-transition-group/utils/PropTypes';
+
 
 const defaultTransOpt = {
     transitionName: '',
@@ -51,7 +51,7 @@ class AnimationApp extends React.Component {
     render() {
         const { location } = this.props
         return (
-            <CSSTransitionGroup { ...(this.transitionOptions || defaultTransOpt) }>
+
                 <Switch location={location} key={location.key}>
                     <Route exact path="/" render={() => (
                         <Redirect to="/explore" />
@@ -62,7 +62,6 @@ class AnimationApp extends React.Component {
                     <Route path="/settings" component={Settings}></Route>
                     <Route path="/wiki/:idName" component={Wiki}></Route>
                 </Switch>
-            </CSSTransitionGroup>
         )
     }
 }
