@@ -3,6 +3,7 @@
 li.wiki-list-item {
     display: block; // not list-item
     height: 60px;
+    background-color: #fff;
     &.border {
         border-top: 0.5px solid #ccc;
         &:last-child {
@@ -54,7 +55,7 @@ li.wiki-list-item.collapse-exit{
 }
 li.wiki-list-item.collapse-exit{
     transition-property: transform, margin-bottom;
-    transition-duration: 3000ms;
+    transition-duration: 300ms;
     transform: scaleY(0);
     margin-bottom: -60px;
 }

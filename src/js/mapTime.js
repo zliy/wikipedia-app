@@ -6,7 +6,7 @@ export default function (int) {
 
     if (today0clock - int > DAYINMS * 3) {
         let intday = new Date(int)
-        let index = (today0clock - int) / DAYINMS | 0 + 1
+        let index = ((today0clock - int) / DAYINMS | 0) + 1
         return { readableTime: `${intday.getFullYear()}年${intday.getMonth() + 1}月${intday.getDate()}日`, index }
     }
     if (today0clock - int > DAYINMS * 2) {

@@ -45,7 +45,7 @@ class History extends React.Component {
                 <TransitionGroup>
                     {historyGroups.map(group => {
                         return (
-                            <Collapse key={group.readableTime} timeout={3000}>
+                            <Collapse key={group.readableTime}>
                                 <LongPress handler={(t) => {
                                     let li = t.closest('li.wiki-list-item')
                                     console.log(li)

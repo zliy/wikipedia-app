@@ -45,7 +45,7 @@ class Wiki extends React.Component {
         const { content, history, match } = this.props
         return (
             <main className="wiki" >
-                <TopNavBar fixed iconLeft={TopNavBar.i.back} leftContent="Back"
+                <TopNavBar iconLeft={TopNavBar.i.back} leftContent="Back"
                     onLeftClick={() => {
                         history.goBack()
                         this.exitScrollPos = window.scrollY

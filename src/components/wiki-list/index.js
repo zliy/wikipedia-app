@@ -14,7 +14,7 @@ export default class extends React.Component {
                         {
                             items.map((item) => {
                                 return (
-                                    <Collapse key={item.title} timeout={3000}>
+                                    <Collapse key={item.title}>
                                         <WikiListItem noborder={noborder} liID={item.title} {...item }></WikiListItem>
                                     </Collapse>
                                 )
