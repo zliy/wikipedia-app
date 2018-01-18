@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const SaveForLater = ({ saved, ...restProps }) => {
     return (
@@ -14,9 +15,9 @@ export const SaveForLater = ({ saved, ...restProps }) => {
 
 class Card extends React.Component {
     render() {
-        const { children } = this.props
+        const { children, onClick } = this.props
         return (
-            <section className="card">
+            <section className="card" onClick={onClick}>
                 {children}
             </section >
         )
@@ -54,10 +55,12 @@ Card.body = function (props) {
 }
 
 Card.footer = function (props) {
-    let { } = props
+    let { children, to,
+        onFooterClick } = props
     return (
-        <footer>
-            Another footer todo
+        <footer onClick={onFooterClick}>
+            {children}
+            <span className="arrow">{'>'}</span>
         </footer>
     )
 }

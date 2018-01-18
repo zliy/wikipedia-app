@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { withRouter } from 'react-router-dom'
 
 import TopNavBar from '@cpt/top-navbar/'
 import BottomNavBar from '@cpt/bottom-navbar/'
@@ -50,12 +52,17 @@ class Saved extends React.Component {
                     <WikiList items={savedItems}></WikiList>
                 </LongPress>
 
-
-                {actTargetID && <ActionSheet cancelHandler={cancelActions}
-                    actions={[
-                        { title: '查看', handler: () => { console.log('view fired') } },
-                        { title: '删除', fontColor: 'red', handler: () => { deleteItems(actTargetID) }, }
-                    ]}></ActionSheet>}
+                <TransitionGroup>
+                    {actTargetID &&
+                        <CSSTransition timeout={300} classNames={'action-sheet-animation'}>
+                            <ActionSheet cancelHandler={cancelActions}
+                                actions={[
+                                    { title: '查看', handler: () => { console.log('view fired') } },
+                                    { title: '删除', fontColor: 'red', handler: () => { deleteItems(actTargetID) }, }
+                                ]} />
+                        </CSSTransition>
+                    }
+                </TransitionGroup>
 
 
                 <BottomNavBar></BottomNavBar>
@@ -97,4 +104,4 @@ function mapDispatch(dispatch) {
 }
 
 
-export default connect(mapState, mapDispatch)(Saved)
+export default withRouter(connect(mapState, mapDispatch)(Saved))

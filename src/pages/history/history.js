@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { withRouter } from 'react-router-dom'
 
 import TopNavBar from "@cpt/top-navbar/index.js"
 import BottomNavBar from '@cpt/bottom-navbar/'
@@ -28,7 +29,7 @@ class History extends React.Component {
 
     render() {
         this.longPressTimeoutID = null
-        const { historyGroups, actTargetID,
+        const { historyGroups, actTargetID, history,
             showActions, cancelActions, deleteItems, clearAll } = this.props
         return (
             <main>
@@ -60,15 +61,17 @@ class History extends React.Component {
                     })}
                 </TransitionGroup>
 
-
-
-                {actTargetID && <ActionSheet cancelHandler={cancelActions}
-                    actions={[
-                        { title: '查看', handler: () => { console.log('view fired') } },
-                        { title: '删除', fontColor: 'red', handler: () => { deleteItems(actTargetID) }, }
-                    ]}></ActionSheet>}
-
-
+                <TransitionGroup>
+                    {actTargetID &&
+                        <CSSTransition timeout={300} classNames={'action-sheet-animation'}>
+                            <ActionSheet cancelHandler={cancelActions}
+                                actions={[
+                                    { title: '查看', handler: () => { history.push(`wiki/${actTargetID}`) } },
+                                    { title: '删除', fontColor: 'red', handler: () => { deleteItems(actTargetID) }, }
+                                ]}></ActionSheet>
+                        </CSSTransition>
+                    }
+                </TransitionGroup>
                 <BottomNavBar></BottomNavBar>
             </main>
         )
@@ -111,5 +114,5 @@ function mapDispatch(dispatch) {
 }
 
 
-export default connect(mapState, mapDispatch)(History)
+export default withRouter(connect(mapState, mapDispatch)(History))
 

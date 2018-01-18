@@ -3,7 +3,6 @@
     background-color: white;
     .loading {
         display: flex;
-        
         justify-content: center;
         align-items: center;
         height: 500px;
@@ -11,28 +10,27 @@
 }
 
 @mixin trans-time {
-    transition-duration: 200ms;
+    transition-duration: 3000ms;
 }
 
-.wiki {
-    &.push-enter {
+.animation-action-push {
+    .wiki.page-enter {
         position: fixed;
         top: 0;
         width: 100%;
         transform: translateX(100%);
         z-index: 10000;
     }
-    &.push-enter-active {
+    .wiki.page-enter-active {
         transform: translateX(0%);
         box-shadow: -8px 0px 20px 0px #b9b9b9;
         transition-property: transform, box-shadow;
         @include trans-time;
     }
-    // &.pop-enter {
-    //     position: absolute;
-    //     width: 100%;
-    // }
-    &.pop-leave {
+}
+
+.animation-action-pop {
+    .wiki.page-exit {
         transform: translateX(0%); // position: fixed;
         position: fixed;
         top: 0px;
@@ -40,7 +38,7 @@
         z-index: 10000;
         box-shadow: -8px 0px 20px 0px #b9b9b9;
     }
-    &.pop-leave-active {
+    .wiki.page-exit-active {
         transform: translateX(100%);
         box-shadow: none;
         @include trans-time;

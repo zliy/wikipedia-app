@@ -53,7 +53,7 @@ li.wiki-list-item.collapse-exit{
     transform: scaleY(1);
     transform-origin: top;
 }
-li.wiki-list-item.collapse-exit{
+li.wiki-list-item.collapse-exit-active{
     transition-property: transform, margin-bottom;
     transition-duration: 300ms;
     transform: scaleY(0);

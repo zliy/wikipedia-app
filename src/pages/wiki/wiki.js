@@ -24,7 +24,6 @@ class Wiki extends React.Component {
         if (!this.props.content.id) {
             this.props.loadContent(title)
             log(title, 'fetching data')
-
             this.props.putHistory(title)
         }
         log(title, 'WillMount')
@@ -33,11 +32,10 @@ class Wiki extends React.Component {
     componentWillUnmount() {
         log(this.props.match.params.idName, 'Unmount')
         log(this.props.match.params.idName, this.props.history.action)
-        if (this.props.history.action === "PUSH") {
-            window.scroll(0, 0)
-        }
+
         // todo: 清理state
     }
+
     render() {
 
         log(this.props.match.params.idName, 'render')
@@ -46,23 +44,19 @@ class Wiki extends React.Component {
         return (
             <main className="wiki" >
                 <TopNavBar iconLeft={TopNavBar.i.back} leftContent="Back"
-                    onLeftClick={() => {
-                        history.goBack()
-                        this.exitScrollPos = window.scrollY
-                        this.forceUpdate()
-                    }}
+                    onLeftClick={() => { history.goBack() }}
                     iconRight={TopNavBar.i.search}>W
                 </TopNavBar>
 
                 {content.id
-                    ? <div id="wiki-style" style={{ transform: this.exitScrollPos ? `translateY(-${this.exitScrollPos + 1}px)` : 'none' }}>
+                    ? <div id="wiki-style">
                         <div id="content">
                             <article className="content" dangerouslySetInnerHTML={{
                                 __html: content.sections && content.sections.reduce((prev, curr) => {
                                     let secHeader = (curr.line && curr.level) ? `<h${curr.level}>${curr.line}</h${curr.level}>` : ''
                                     let section = secHeader + curr.text
                                     return prev + section
-                                }, `<h1>${content.displaytitle}</h1><p>${content.description||''}</p>`)
+                                }, `<h1>${content.displaytitle}</h1><p>${content.description || ''}</p>`)
                             }}
                                 onClick={(e) => {
                                     if (e.target.nodeName == 'A') {

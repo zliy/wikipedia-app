@@ -42,9 +42,46 @@
             display: flex;
             align-items: center;
             border-radius: 12px;
-            margin-top: 10px; 
+            margin-top: 10px;
             justify-content: center;
             height: 52px;
         }
     }
+}
+
+@mixin animation-option {
+    transition-duration: 300ms;
+    transition-property: transform, background-color;
+}
+
+.action-sheet-animation-enter {
+    .action-sheet-content {
+        transform: translateY(110%);
+    }
+    background-color: transparent;
+}
+
+.action-sheet-animation-enter-active {
+    .action-sheet-content {
+        transform: translateY(0%);
+        @include animation-option();
+    }
+    background-color: rgba(0, 0, 0, 0.4);
+    @include animation-option();
+}
+
+.action-sheet-animation-exit {
+    .action-sheet-content {
+        transform: translateY(0%);
+    }
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.action-sheet-animation-exit-active {
+    .action-sheet-content {
+        transform: translateY(110%);
+        @include animation-option();
+    }
+    background-color: transparent;
+    @include animation-option();
 }

@@ -1,0 +1,44 @@
+.animation-action-push {
+    @mixin animation-option {
+        transition-duration: 3000ms;
+    }
+    .fulllist {
+        &.page-enter {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            .wiki-list {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 300px, 0% 300px)
+            }
+        }
+        &.page-enter-active {
+            .wiki-list {
+                @include animation-option();
+                transition-property: transform, clip-path;
+            }
+        }
+    }
+    .explore {
+        &.page-exit {
+            [data-clicked] {
+                position: relative;
+                clip-path: polygon(0% 0%, 0% 300%, 0 300%, 0 70px, 100% 70px, 100% 370px, 0 370px, 0 300%, 100% 300%, 100% 0);
+            }
+        }
+        &.page-exit-active {
+            [data-clicked] {
+                @include animation-option();
+                transition-property: transform, clip-path;
+                footer {
+                    @include animation-option();
+                    transition-property: transform;
+                }
+            }
+            .top-navbar {
+                // opacity: 0;
+                @include animation-option();
+                transition-property: opacity;
+            }
+        }
+    }
+}

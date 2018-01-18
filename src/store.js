@@ -5,12 +5,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 import logger from "redux-logger"
 
-import { reducer as savedReducer } from '@/pages/saved'
-import { reducer as historyReducer } from '@/pages/history'
-import { reducer as exploreReducer } from '@/pages/explore'
-import { reducer as wikiReducer } from '@/pages/wiki'
-
-
+import { reducer as savedReducer } from '@/pages/saved/'
+import { reducer as historyReducer } from '@/pages/history/'
+import { reducer as exploreReducer } from '@/pages/explore/'
+import { reducer as wikiReducer } from '@/pages/wiki/'
+import { reducer as searchReducer } from '@/pages/search/'
 
 
 const rootReducer = combineReducers({
@@ -18,11 +17,11 @@ const rootReducer = combineReducers({
     history: historyReducer,
     explore: exploreReducer,
     wiki: wikiReducer,
-    // historyWikisContent, // 返回时直接加载页面数据
+    search: searchReducer,
 })
 
 
-const mwS = applyMiddleware( thunk, logger)
+const mwS = applyMiddleware(thunk, logger)
 export default createStore(rootReducer, composeWithDevTools(mwS))
 
 

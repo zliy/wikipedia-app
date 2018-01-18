@@ -15,16 +15,16 @@ const SummaryShape = PropTypes.shape({
 export class Random extends React.Component {
     render() {
         const { summary, isSaved,
-            toggleSave, } = this.props
+            toggleSave, onCardClick } = this.props
         return (
-            <Card>
+            <Card onClick={onCardClick}>
                 <Card.header subtitle="Random article" title="Wikipedia" />
                 <Card.body
                     imgSrc={_.get(summary, 'thumbnail.source')} //_.get(summary, 'originalimage.source') ||
                     description={summary.description || summary.extract}
                     title={summary.title}
                 >
-                    <SaveForLater saved={isSaved} onClick={() => { toggleSave(summary.title) }} />
+                    <SaveForLater saved={isSaved} onClick={(e) => { toggleSave(summary.title); e.stopPropagation() }} />
                 </Card.body>
                 {/* <Card.footer /> */}
             </Card>
@@ -39,16 +39,25 @@ Random.propTypes = {
 
 
 export class TopRead extends React.Component {
+
+    get dayString() {
+        const date = this.props.date
+        let y = date.substr(0, 4)
+        let m = date.substr(4, 2)
+        let d = date.substr(6, 2)
+        return `${m}月${d}日`
+    }
     render() {
-        const { date, items } = this.props
+        const { items, date,
+            onFooterClick, } = this.props
         return (
             <Card>
                 <Card.header
                     subtitle="Top read on Chinese Wikipedia"
-                    title={date}
+                    title={this.dayString}
                 ></Card.header>
                 <WikiList items={items} noborder />
-                <Card.footer />
+                <Card.footer onFooterClick={onFooterClick}>在 {this.dayString} 的更多热门条目</Card.footer>
             </Card>
         )
     }
@@ -73,9 +82,7 @@ export class MoreLike extends React.Component {
                     title={summary.title}
                 />
                 <WikiList items={items.slice(0, 3)} noborder />
-
-                <Card.footer />
-
+                <Card.footer>更多类似 {summary.title} 的条目</Card.footer>
             </Card>
         )
     }

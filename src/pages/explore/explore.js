@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import TopNavBar from '@cpt/top-navbar/'
 import BottomNavBar from '@cpt/bottom-navbar/'
@@ -52,14 +53,14 @@ class Explore extends React.Component {
 
     render() {
         console.log('explore rendered')
-        const { explored, savedItems, isFetching,
+        const { history, explored, savedItems, isFetching,
             fetchNew, toggleSave } = this.props
         return (
             <main className="explore" onTouchMove={(e) => {
                 if (!isFetching && window.pageYOffset <= -90) {
                     fetchNew()
                 }
-                if(isFetching){
+                if (isFetching) {
                     console.log(window.scrollY)
                     e.preventDefault()
                 }
@@ -68,6 +69,7 @@ class Explore extends React.Component {
                     iconLeft={TopNavBar.i.settings}
                     iconRight={TopNavBar.i.search}
                     onLeftClick={() => this.props.history.push('/settings')}
+                    onRightClick={() => this.props.history.push('/search')}
                 >Explore</TopNavBar>
 
                 {isFetching ? <Loading ref={(dom) => { this.loadingDom = dom }} newStyle={this.newStyle}></Loading> : <span style={{ "display": "flex", "justifyContent": "center", "alignItems": "flex-start", "height": "46px", "marginTop": "-46px" }}>下拉刷新</span>}
@@ -78,6 +80,7 @@ class Explore extends React.Component {
                                 const summary = aCard.summary
                                 return (
                                     <Cards.Random key={aCard.type + summary.title}
+                                        onCardClick={() => { history.push(`/wiki/${summary.title}`) }}
                                         summary={summary}
                                         isSaved={savedItems.some(val => val.title === summary.title)}
                                         toggleSave={toggleSave}
@@ -100,6 +103,10 @@ class Explore extends React.Component {
                                     <Cards.TopRead key={aCard.type + date}
                                         date={date}
                                         items={items.slice(0, 5)}
+                                        onFooterClick={(e) => {
+                                            e.target.closest('.card').dataset.clicked = 'true'
+                                            history.push(`/fulllist/topRead/${date}`)
+                                        }}
                                     />
                                 )
                             }
@@ -149,4 +156,4 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     }
 }
 
-export default connect(mapState, mapDispatch, mergeProps)(Explore)
+export default withRouter(connect(mapState, mapDispatch, mergeProps)(Explore))
