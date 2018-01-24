@@ -1,9 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import SVG from 'react-inlinesvg';
+import bookmark from '@/icon/bookmark.svg'
+import bookmarko from '@/icon/bookmark-o.svg'
+
+
 export const SaveForLater = ({ saved, ...restProps }) => {
     return (
-        <div style={{ color: "blue", }} {...restProps} >
+        <div className="save-for-later" style={{ color: "blue", }} {...restProps} >
+            {/* <SVG src={saved?bookmark:bookmarko} className="bookmark-svg"></SVG> */}
             {saved ? <i className="fa fa-bookmark" aria-hidden="true"></i>
                 : <i className="fa fa-bookmark-o" aria-hidden="true"></i>}
             {saved ? "已收藏此条目" : "收藏此条目"}
@@ -28,7 +34,7 @@ Card.header = function (props) {
     const { title, subtitle, thumb } = props
     return (
         <header className="card-header">
-            <img src={thumb} alt="" />
+            <img src={thumb} alt="" style={{padding: "5px"}} />
             <div className="card-titles">
                 <p>{subtitle}</p>
                 <h4>{title}</h4>

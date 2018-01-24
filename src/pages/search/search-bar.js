@@ -1,4 +1,7 @@
 import React from "react"
+import SVG from 'react-inlinesvg';
+
+import close from '@/icon/close.svg'
 
 
 
@@ -29,8 +32,10 @@ export default class SearchBar extends React.Component {
                         onFocus={this.handleFocus}
                         ref={(n) => { this.inputNode = n }}
                         onInput={e => onInput(e.target.value)} />
-                    <i class="clear-input fa fa-times-circle" aria-hidden="true"></i>
-                    <span className='close-page' onClick={onCloseClick}>X</span>
+                    <i className="clear-input fa fa-times-circle" aria-hidden="true"></i>
+                    <span className="close-page" onClick={onCloseClick}>
+                        <SVG src={close} />
+                    </span>
                 </div>
                 <div className="search-bar-holder"></div>
             </div>

@@ -12,7 +12,7 @@
     }
     .settings.page-enter-active {
         transition-property: transform, box-shadow;
-        transition-duration: 3000ms;
+        transition-duration: 300ms;
         transform: translateY(0vh);
         box-shadow: -8px 0px 20px 0px #b9b9b9;
     }
@@ -28,7 +28,7 @@
     }
     .settings.page-exit-active {
         transition-property: transform, box-shadow;
-        transition-duration: 3000ms;
+        transition-duration: 300ms;
         transform: translateY(100vh);
         box-shadow: -8px 0px 20px 0px #b9b9b9;
     }

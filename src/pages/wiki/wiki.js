@@ -9,6 +9,10 @@ import PropTypes from 'prop-types'
 import { putHistory } from './actions'
 import loadingImg from '@/icon/loading.gif'
 import debug from 'debug'
+
+import SVG from 'react-inlinesvg';
+import wikipediaW from '@/icon/wikipedia-w.svg'
+
 let log = debug('⭐️Wiki:')
 
 /* 
@@ -32,8 +36,6 @@ class Wiki extends React.Component {
     componentWillUnmount() {
         log(this.props.match.params.idName, 'Unmount')
         log(this.props.match.params.idName, this.props.history.action)
-
-        // todo: 清理state
     }
 
     render() {
@@ -45,12 +47,16 @@ class Wiki extends React.Component {
             <main className="wiki" >
                 <TopNavBar iconLeft={TopNavBar.i.back} leftContent="Back"
                     onLeftClick={() => { history.goBack() }}
-                    iconRight={TopNavBar.i.search}>W
+                    iconRight={TopNavBar.i.search}>
+                    <SVG src={wikipediaW} className="wlogo"></SVG>
                 </TopNavBar>
 
                 {content.id
                     ? <div id="wiki-style">
                         <div id="content">
+                            {content.thumb &&
+                                <div className="wiki-page-cover"><img src={content.thumb.url}/></div>
+                            }
                             <article className="content" dangerouslySetInnerHTML={{
                                 __html: content.sections && content.sections.reduce((prev, curr) => {
                                     let secHeader = (curr.line && curr.level) ? `<h${curr.level}>${curr.line}</h${curr.level}>` : ''

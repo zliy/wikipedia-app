@@ -30,7 +30,7 @@ class Saved extends React.Component {
     render() {
 
         // console.log('saved rendered')
-        const { savedItems, actTargetID,
+        const { savedItems, actTargetID, history,
             showActions, cancelActions, deleteItems, clearAll } = this.props
         return (
             <main >
@@ -57,7 +57,7 @@ class Saved extends React.Component {
                         <CSSTransition timeout={300} classNames={'action-sheet-animation'}>
                             <ActionSheet cancelHandler={cancelActions}
                                 actions={[
-                                    { title: '查看', handler: () => { console.log('view fired') } },
+                                    { title: '查看', handler: () => { history.push(`wiki/${actTargetID}`) } },
                                     { title: '删除', fontColor: 'red', handler: () => { deleteItems(actTargetID) }, }
                                 ]} />
                         </CSSTransition>

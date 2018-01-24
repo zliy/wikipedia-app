@@ -32,6 +32,9 @@ function mapState(state, ownProps) {
         case 'topRead':
             items = explored.filter(card => card.type === "topRead" && card.date === list)[0].items
             break
+        case 'moreLike':
+            items = explored.filter(card => card.type === "moreLike" && card.summary.title === list)[0].items
+            break
         default:
             throw new Error('fullList: unknown List Type')
     }

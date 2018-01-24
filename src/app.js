@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import store from '@/store'
@@ -17,23 +17,65 @@ import { actions as savedActs } from '@/pages/saved/'
 import { actions as historyActs } from '@/pages/history/'
 
 
+
 class AnimationApp extends React.Component {
     componentWillUpdate() {
         const { history, location } = this.props
         this.exitingPageY = window.scrollY
     }
+    TOPNAVHEIGHT = 46
+    CARDHEADERHEIGHT = 70
+    fullListPush = (node) => {
+        let cardNode = node.querySelector('[data-clicked]')
+        let cardListNode = cardNode.querySelector('.wiki-list')
+
+        let cardNodeRect = cardNode.getBoundingClientRect()
+        this.cardListRect = cardListNode.getBoundingClientRect() //note: code order
+
+        let placeHolder = document.createElement('section')
+        placeHolder.classList.add('card')
+        placeHolder.style = `visibility: hidden; height: ${cardNodeRect.height}px `
+        cardNode.before(placeHolder)
+
+        cardNode.style.transform = `translateY(${cardNodeRect.top}px)`
+        cardNode.style.position = `fixed`
+        cardListNode.style.height = `${this.cardListRect.height}px`
+
+        document.querySelector('.fulllist .wiki-list').style.transform = `translateY(${this.cardListRect.top - this.TOPNAVHEIGHT}px)`
+    }
+    fullListPushing = (node) => {
+        // nodes
+        let cardNode = node.querySelector('[data-clicked]')
+        let cardListNode = cardNode.querySelector('.wiki-list')
+        let fullListListNode = document.querySelector('.fulllist .wiki-list')
+        // height style to
+        let contentHeight = window.innerHeight - this.TOPNAVHEIGHT
+        cardListNode.style.height = `${contentHeight}px`
+        fullListListNode.style.webkitClipPath = `polygon(0% 0%, 100% 0%, 100% ${contentHeight}px, 0% ${contentHeight}px)`
+        fullListListNode.style.clipPath = `polygon(0% 0%, 100% 0%, 100% ${contentHeight}px, 0% ${contentHeight}px)`
+        // position style to
+        cardNode.style.transform = `translateY(-${this.CARDHEADERHEIGHT - this.TOPNAVHEIGHT}px)`
+        fullListListNode.style.transform = 'translateY(0px)'
+    }
     handleAnimationEnter = (node) => {
     }
-    handleAnimationEntered = () => {
+    handleAnimationEntered = (node) => {
+        let pathname = this.props.location.pathname
+        if (pathname.split('/')[1] === "fulllist" && this.props.history.action == 'PUSH') {
+            let fullListListNode = node.querySelector('.wiki-list')
+            setTimeout(() => { fullListListNode.style = '' })
+        }
+
         this.props.history.action == 'PUSH' && window.scroll(0, 0)
     }
     handleAnimationExit = (node) => {
+        // let props = this.props
+        // debugger
         let pathname = this.props.location.pathname
         if (pathname.split('/')[1] === "fulllist" && this.props.history.action == 'PUSH') {
-            let cardNode = node.querySelector('[data-clicked]')
-            let listNode = cardNode.querySelector('.wiki-list')
-            this.cardListTop = listNode.getBoundingClientRect().top
-            document.querySelector('.fulllist .wiki-list').style.transform = `translateY(${this.cardListTop - 46}px)`
+            this.fullListPush(node)
+        } else if (pathname.split('/')[1] === "fulllist" && this.props.history.action == 'PUSH') {
+
         } else {
             let transformTarget = node.querySelector('#wiki-style')
             if (transformTarget && this.props.history.action == 'POP') {
@@ -44,14 +86,11 @@ class AnimationApp extends React.Component {
     handleAnimationExiting = (node) => {
         let pathname = this.props.location.pathname
         if (pathname.split('/')[1] === "fulllist" && this.props.history.action == 'PUSH') {
-            let cardNode = node.querySelector('[data-clicked]')
-            cardNode.style.transform = `translateY(-${this.cardListTop - 46}px)`
-            document.querySelector('.fulllist .wiki-list').style.transform = `translateY(0px)`
-            cardNode.style.clipPath = `polygon(0% 0%, 0% 300%, 0 300%, 0 70px, 100% 70px, 100% 670px, 0 670px, 0 300%, 100% 300%, 100% 0)`
-            document.querySelector('.fulllist .wiki-list').style.clipPath = `polygon(0% 0%, 100% 0%, 100% 600px, 0% 600px)`
-            cardNode.querySelector('footer').style.transform = `translateY(300px)`
+            this.fullListPushing(node)
         }
     }
+
+
 
     render() {
         const { location, history } = this.props
@@ -63,7 +102,7 @@ class AnimationApp extends React.Component {
         }
         return (
             <TransitionGroup className={'animation-action-' + history.action.toLowerCase()}>
-                <CSSTransition key={key} timeout={3000}
+                <CSSTransition key={key} timeout={{enter: 300,exit: 280}}
                     classNames={'page'}
                     onExit={this.handleAnimationExit}
                     onExiting={this.handleAnimationExiting}
@@ -103,4 +142,5 @@ class App extends React.Component {
     }
 }
 
-export default App
+
+export default withRouter(App)

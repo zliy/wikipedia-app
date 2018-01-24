@@ -10,8 +10,7 @@
     background-color: white;
     box-shadow: 0 1px 8px rgba(128, 131, 138, 0.28);
     .search-bar-icon {
-        color: #555;
-        // padding: 8px;
+        color: #555; // padding: 8px;
     }
     input[type=text] {
         height: 100%;
@@ -39,8 +38,12 @@
         padding: 8px;
     }
     .close-page {
-        width: 30px;
-        height: 30px;
+        width: 26px;
+        height: 26px;
+        padding: 4px;
+        svg {
+            fill: #444;
+        }
     }
 }
 

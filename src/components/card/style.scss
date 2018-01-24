@@ -1,8 +1,7 @@
 section.card {
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 1px 4px rgba(128, 131, 138, 0.28);
-    // box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    box-shadow: 0 1px 4px rgba(128, 131, 138, 0.28); // box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
     .card-header {
         display: flex;
         padding: 15px 10px;
@@ -38,11 +37,23 @@ section.card {
                 width: 100%;
             }
         }
+        .fa-bookmark,
+        .fa-bookmark-o {
+            margin-right: 4px;
+        }
+        .bookmark-svg {
+            vertical-align: middle;
+            svg {
+                height: 16px;
+                width: auto;
+                margin-right: 4px;
+            }
+        }
         .card-body-content {
             padding: 12px;
             color: #333;
             * {
-                margin: 0px;
+                margin-top: 0px;
                 margin-bottom: 10px;
                 &:last-child {
                     margin-bottom: 0px;
@@ -67,3 +78,4 @@ section.card {
         color: #777;
     }
 }
+

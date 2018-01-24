@@ -16,7 +16,7 @@ class Search extends React.Component {
         return (
             <main className='search'>
                 <SearchBar onCloseClick={
-                    () => history.goBack()
+                    () => { history.goBack() }
                 } onInput={_.debounce(requestSearch, 300)} />
                 <WikiList items={results} />
             </main>
@@ -27,7 +27,6 @@ class Search extends React.Component {
 function mapState(state) {
     return {
         results: state.search.results,
-
     }
 }
 

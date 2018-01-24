@@ -94,6 +94,10 @@ class Explore extends React.Component {
                                         time={time}
                                         summary={summary}
                                         items={items}
+                                        onFooterClick={(e) => {
+                                            e.target.closest('.card').dataset.clicked = 'true'
+                                            history.push(`/fulllist/moreLike/${summary.title}`)
+                                        }}
                                     />
                                 )
                             }
@@ -102,10 +106,11 @@ class Explore extends React.Component {
                                 return (
                                     <Cards.TopRead key={aCard.type + date}
                                         date={date}
-                                        items={items.slice(0, 5)}
+                                        items={items}
                                         onFooterClick={(e) => {
                                             e.target.closest('.card').dataset.clicked = 'true'
                                             history.push(`/fulllist/topRead/${date}`)
+
                                         }}
                                     />
                                 )

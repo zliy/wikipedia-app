@@ -4,6 +4,11 @@ import _ from 'lodash'
 import Card, { SaveForLater } from '@cpt/card/'
 import WikiList from '@cpt/wiki-list/'
 
+import dice from '@/icon/003-dice.svg'
+import ranking from '@/icon/ranking.svg'
+import books from '@/icon/books.svg'
+
+
 import mapTime from '@/js/mapTime'
 const SummaryShape = PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -18,7 +23,7 @@ export class Random extends React.Component {
             toggleSave, onCardClick } = this.props
         return (
             <Card onClick={onCardClick}>
-                <Card.header subtitle="Random article" title="Wikipedia" />
+                <Card.header subtitle="Random article" title="Wikipedia" thumb={dice} />
                 <Card.body
                     imgSrc={_.get(summary, 'thumbnail.source')} //_.get(summary, 'originalimage.source') ||
                     description={summary.description || summary.extract}
@@ -55,9 +60,12 @@ export class TopRead extends React.Component {
                 <Card.header
                     subtitle="Top read on Chinese Wikipedia"
                     title={this.dayString}
+                    thumb={ranking}
                 ></Card.header>
-                <WikiList items={items} noborder />
-                <Card.footer onFooterClick={onFooterClick}>在 {this.dayString} 的更多热门条目</Card.footer>
+                <WikiList items={items.slice(0, 5)} noborder />
+                <Card.footer onFooterClick={onFooterClick}>
+                    {`在 ${this.dayString} 的更多热门条目`}
+                </Card.footer>
             </Card>
         )
     }
@@ -72,17 +80,23 @@ TopRead.propTypes = {
 
 export class MoreLike extends React.Component {
     render() {
-        const { time, summary, items } = this.props
+        const { time, summary, items,
+            onFooterClick } = this.props
         return (
             <Card>
-                <Card.header subtitle="Because you read" title={mapTime(time).readableTime} />
+                <Card.header subtitle="Because you read" 
+                title={mapTime(time).readableTime} 
+                thumb={books}                
+                />
                 <Card.body
                     imgSrc={summary.originalimage.source}
                     description={summary.description || summary.extract}
                     title={summary.title}
                 />
                 <WikiList items={items.slice(0, 3)} noborder />
-                <Card.footer>更多类似 {summary.title} 的条目</Card.footer>
+                <Card.footer onFooterClick={onFooterClick} >
+                    {`更多类似 ${summary.title} 的条目`}
+                </Card.footer>
             </Card>
         )
     }
