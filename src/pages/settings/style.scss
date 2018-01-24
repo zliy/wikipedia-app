@@ -1,0 +1,35 @@
+.settings {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #EFEFF4;
+}
+
+.animation-action-push {
+    .settings.page-enter {
+        position: fixed;
+        z-index: 10000;
+        transform: translateY(100vh)
+    }
+    .settings.page-enter-active {
+        transition-property: transform, box-shadow;
+        transition-duration: 300ms;
+        transform: translateY(0vh);
+        box-shadow: -8px 0px 20px 0px #b9b9b9;
+    }
+}
+
+.animation-action-pop {
+    .settings.page-exit {
+        position: fixed;
+        top: 0px;
+        z-index: 10000;
+        transform: translateY(0vh);
+        box-shadow: -8px 0px 20px 0px #b9b9b9;
+    }
+    .settings.page-exit-active {
+        transition-property: transform, box-shadow;
+        transition-duration: 300ms;
+        transform: translateY(100vh);
+        box-shadow: -8px 0px 20px 0px #b9b9b9;
+    }
+}

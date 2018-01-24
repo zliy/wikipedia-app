@@ -1,0 +1,11 @@
+<svg width="200px" height="298px" viewBox="738 65 200 298" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40 (33762) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="938 65 938 363 838 265.641451 738 363 738 65"></polygon>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="200" height="298" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <use id="Polygon" stroke="#333333" mask="url(#mask-2)" stroke-width="40" fill="none" xlink:href="#path-1"></use>
+</svg>

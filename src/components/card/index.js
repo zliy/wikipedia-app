@@ -1,29 +1,40 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export const SaveForLater = ({ saved }) => {
+import SVG from 'react-inlinesvg';
+import bookmark from '@/icon/bookmark.svg'
+import bookmarko from '@/icon/bookmark-o.svg'
+
+
+export const SaveForLater = ({ saved, ...restProps }) => {
     return (
-        <div>
-            <input type="checkbox" checked={saved} />Save for Latter
+        <div className="save-for-later" style={{ color: "blue", }} {...restProps} >
+            {/* <SVG src={saved?bookmark:bookmarko} className="bookmark-svg"></SVG> */}
+            {saved ? <i className="fa fa-bookmark" aria-hidden="true"></i>
+                : <i className="fa fa-bookmark-o" aria-hidden="true"></i>}
+            {saved ? "已收藏此条目" : "收藏此条目"}
         </div>
-    );
-};
+
+    )
+}
 
 
 class Card extends React.Component {
     render() {
-        const { children } = this.props
+        const { children, onClick } = this.props
         return (
-            <section className="card">
+            <section className="card" onClick={onClick}>
                 {children}
             </section >
         )
     }
 }
+
 Card.header = function (props) {
     const { title, subtitle, thumb } = props
     return (
         <header className="card-header">
-            <img src={thumb} alt="" />
+            <img src={thumb} alt="" style={{padding: "5px"}} />
             <div className="card-titles">
                 <p>{subtitle}</p>
                 <h4>{title}</h4>
@@ -31,8 +42,9 @@ Card.header = function (props) {
         </header>
     )
 }
+
 Card.body = function (props) {
-    const { imgSrc, title, description, save } = props
+    const { imgSrc, title, description, children, } = props
     return (
         <div className="card-body">
             {imgSrc ?
@@ -42,16 +54,21 @@ Card.body = function (props) {
                 <div className="card-body-content">
                     {title && <h2>{title}</h2>}
                     {description && <p>{description}</p>}
+                    {children}
                 </div> : ''}
-                <SaveForLater saved></SaveForLater>
         </div>
     )
 }
+
 Card.footer = function (props) {
+    let { children, to,
+        onFooterClick } = props
     return (
-        <footer>
-            Another footer todo
+        <footer onClick={onFooterClick}>
+            {children}
+            <span className="arrow">{'>'}</span>
         </footer>
     )
 }
+
 export default Card

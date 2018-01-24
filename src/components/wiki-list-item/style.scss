@@ -3,6 +3,7 @@
 li.wiki-list-item {
     display: block; // not list-item
     height: 60px;
+    background-color: #fff;
     &.border {
         border-top: 0.5px solid #ccc;
         &:last-child {
@@ -46,4 +47,15 @@ li.wiki-list-item {
             background-size: cover;
         }
     }
+}
+
+li.wiki-list-item.collapse-exit{
+    transform: scaleY(1);
+    transform-origin: top;
+}
+li.wiki-list-item.collapse-exit-active{
+    transition-property: transform, margin-bottom;
+    transition-duration: 300ms;
+    transform: scaleY(0);
+    margin-bottom: -60px;
 }

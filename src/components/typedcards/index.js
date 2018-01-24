@@ -1,9 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import Card from '@cpt/card/'
+import _ from 'lodash'
+import Card, { SaveForLater } from '@cpt/card/'
 import WikiList from '@cpt/wiki-list/'
 
+import dice from '@/icon/003-dice.svg'
+import ranking from '@/icon/ranking.svg'
+import books from '@/icon/books.svg'
+
+
+import mapTime from '@/js/mapTime'
 const SummaryShape = PropTypes.shape({
     title: PropTypes.string.isRequired,
     extract: PropTypes.string.isRequired,
@@ -13,37 +19,53 @@ const SummaryShape = PropTypes.shape({
 
 export class Random extends React.Component {
     render() {
-        const { summary } = this.props
+        const { summary, isSaved,
+            toggleSave, onCardClick } = this.props
         return (
-            <Card>
-                <Card.header subtitle="Random article" title="Wikipedia" />
+            <Card onClick={onCardClick}>
+                <Card.header subtitle="Random article" title="Wikipedia" thumb={dice} />
                 <Card.body
-                    imgSrc={summary.originalimage.source}
+                    imgSrc={_.get(summary, 'thumbnail.source')} //_.get(summary, 'originalimage.source') ||
                     description={summary.description || summary.extract}
                     title={summary.title}
-                />
-                <Card.footer />
+                >
+                    <SaveForLater saved={isSaved} onClick={(e) => { toggleSave(summary.title); e.stopPropagation() }} />
+                </Card.body>
+                {/* <Card.footer /> */}
             </Card>
         )
     }
 }
 Random.propTypes = {
     summary: SummaryShape,
+    isSaved: PropTypes.bool.isRequired,
 }
 
 
 
 export class TopRead extends React.Component {
+
+    get dayString() {
+        const date = this.props.date
+        let y = date.substr(0, 4)
+        let m = date.substr(4, 2)
+        let d = date.substr(6, 2)
+        return `${m}月${d}日`
+    }
     render() {
-        const { time, items } = this.props
+        const { items, date,
+            onFooterClick, } = this.props
         return (
             <Card>
                 <Card.header
                     subtitle="Top read on Chinese Wikipedia"
-                    title={time}
+                    title={this.dayString}
+                    thumb={ranking}
                 ></Card.header>
-                <WikiList items={items} />
-                <Card.footer />
+                <WikiList items={items.slice(0, 5)} noborder />
+                <Card.footer onFooterClick={onFooterClick}>
+                    {`在 ${this.dayString} 的更多热门条目`}
+                </Card.footer>
             </Card>
         )
     }
@@ -56,27 +78,31 @@ TopRead.propTypes = {
 
 
 
-export class BeacuseURead extends React.Component {
+export class MoreLike extends React.Component {
     render() {
-        const { time, summary, items } = this.props
+        const { time, summary, items,
+            onFooterClick } = this.props
         return (
             <Card>
-                <Card.header subtitle="Because you read" title={time} />
+                <Card.header subtitle="Because you read" 
+                title={mapTime(time).readableTime} 
+                thumb={books}                
+                />
                 <Card.body
                     imgSrc={summary.originalimage.source}
                     description={summary.description || summary.extract}
                     title={summary.title}
                 />
-                <WikiList items={items.slice(0, 3)} />
-
-                <Card.footer />
-
+                <WikiList items={items.slice(0, 3)} noborder />
+                <Card.footer onFooterClick={onFooterClick} >
+                    {`更多类似 ${summary.title} 的条目`}
+                </Card.footer>
             </Card>
         )
     }
 }
 
-BeacuseURead.propTypes = {
+MoreLike.propTypes = {
     time: PropTypes.number, // readable time
     summary: SummaryShape,
     items: PropTypes.arrayOf(SummaryShape),

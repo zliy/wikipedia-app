@@ -1,0 +1,15 @@
+{
+  "short_name": "Wikipedia",
+  "name": "Wikipedia React",
+  "icons": [
+    {
+      "src": "./wiki_w_logo.jpg",
+      "sizes": "350x350",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": "./explore",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}

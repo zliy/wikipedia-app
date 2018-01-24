@@ -8,7 +8,18 @@
     ul {
         padding: 0;
         margin: 0;
-        width: 100%;
-        background-color: #fff;
+        width: 100%; // background-color: #fff;
     }
+}
+
+.wiki-list.collapse-exit {
+    transform: scaleY(1); 
+    transform-origin: top;
+}
+
+.wiki-list.collapse-exit-active {
+    transition-property: transform, margin-bottom;
+    transition-duration: 300ms;
+    transform: scaleY(0);
+    margin-bottom: -117px;
 }

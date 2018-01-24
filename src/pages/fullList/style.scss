@@ -1,0 +1,80 @@
+@mixin animation-option {
+    transition-duration: 300ms;
+}
+
+.animation-action-push {
+    .fulllist {
+        &.page-enter {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10002;
+            .wiki-list {
+                -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 300px, 0% 300px);
+                clip-path: polygon(0% 0%, 100% 0%, 100% 300px, 0% 300px);
+            }
+            .top-navbar-bar {
+                opacity: 0;
+            }
+        }
+        &.page-enter-active {
+            .wiki-list {
+                @include animation-option();
+                transition-property: transform, clip-path, -webkit-clip-path;
+                transition-timing-function: ease, linear, linear;
+            }
+            .top-navbar-bar {
+                opacity: 1;
+                @include animation-option();
+                transition-property: opacity;
+            }
+        }
+    }
+    .fulllist + .explore {
+        &.page-exit {
+            .top-navbar-bar {
+                z-index: 10001;
+            }
+            .card[data-clicked] {
+                // position: fixed;
+                top: 0;
+                z-index: 10000;
+            }
+        }
+        &.page-exit-active {
+            .card[data-clicked] {
+                @include animation-option();
+                transition-property: transform;
+                .wiki-list {
+                    @include animation-option();
+                    transition-property: height;
+                    transition-timing-function: linear;
+                }
+            } 
+        }
+    }
+}
+
+.animation-action-pop {
+    .fulllist {
+        &.page-exit {
+            z-index: 10000;
+            position: fixed;
+            top: 0px;
+            width: 100%;
+            box-shadow: -8px 0px 20px 0px #b9b9b9;
+            
+        }
+        &.page-exit-active {
+            // .top-navbar-bar{
+            //     opacity: 0;
+            //     @include animation-option();
+            //     transition-property: opacity;
+            // }
+            transform: translateY(100vh);
+            box-shadow: none;
+            @include animation-option();
+            transition-property: transform, box-shadow;
+        }
+    }
+}

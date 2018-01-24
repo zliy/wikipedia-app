@@ -5,7 +5,9 @@ export default class extends React.Component {
     moveHandler = (e) => {
         e.preventDefault()
         let { clientX, clientY } = e.changedTouches[0]
-        let currOverBtn = document.elementFromPoint(clientX, clientY).closest('.action-sheet-button')
+
+        let currOverElement = document.elementFromPoint(clientX, clientY) // could be null
+        let currOverBtn = currOverElement && currOverElement.closest('.action-sheet-button')
 
         if (this.mouseMoveOver !== currOverBtn) {
             this.mouseMoveOver && (this.mouseMoveOver.classList.remove('active'))
@@ -22,9 +24,9 @@ export default class extends React.Component {
         let isRealClick = false
         this.mouseMoveOver = null
         return (
-            <div className='action-sheet' 
-                onTouchStart={()=>{ isRealClick = true}}
-                onClick={(e)=>{ isRealClick && cancelHandler()}}
+            <div className='action-sheet'
+                onTouchStart={() => { isRealClick = true }}
+                onClick={(e) => { isRealClick && cancelHandler() }}
             >
                 <div className="action-sheet-content"
                     onTouchStart={(e) => {
@@ -33,7 +35,8 @@ export default class extends React.Component {
                     }}
                     onTouchEnd={(e) => {
                         let { clientX, clientY } = e.changedTouches[0]
-                        let currOverBtn = document.elementFromPoint(clientX, clientY).closest('.action-sheet-button')
+                        let currOverElement = document.elementFromPoint(clientX, clientY) // could be null
+                        let currOverBtn = currOverElement && currOverElement.closest('.action-sheet-button')
                         currOverBtn && currOverBtn.classList.remove('active')
                         if (this.mouseMoveOver) {
                             currOverBtn.dispatchEvent(new MouseEvent('click', { 'bubbles': true, }))
