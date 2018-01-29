@@ -20,7 +20,6 @@ import { actions as historyActs } from '@/pages/history/'
 
 class AnimationApp extends React.Component {
     componentWillUpdate() {
-        const { history, location } = this.props
         this.exitingPageY = window.scrollY
     }
     TOPNAVHEIGHT = 46
@@ -61,31 +60,31 @@ class AnimationApp extends React.Component {
     }
     handleAnimationEntered = (node) => {
         let pathname = this.props.location.pathname
-        if (pathname.split('/')[1] === "fulllist" && this.props.history.action == 'PUSH') {
+        if (pathname.split('/')[1] === "fulllist" && this.props.history.action === 'PUSH') {
             let fullListListNode = node.querySelector('.wiki-list')
             setTimeout(() => { fullListListNode.style = '' })
         }
 
-        this.props.history.action == 'PUSH' && window.scroll(0, 0)
+        this.props.history.action === 'PUSH' && window.scroll(0, 0)
     }
     handleAnimationExit = (node) => {
         // let props = this.props
         // debugger
         let pathname = this.props.location.pathname
-        if (pathname.split('/')[1] === "fulllist" && this.props.history.action == 'PUSH') {
+        if (pathname.split('/')[1] === "fulllist" && this.props.history.action === 'PUSH') {
             this.fullListPush(node)
-        } else if (pathname.split('/')[1] === "fulllist" && this.props.history.action == 'PUSH') {
+        } else if (pathname.split('/')[1] === "fulllist" && this.props.history.action === 'PUSH') {
 
         } else {
             let transformTarget = node.querySelector('#wiki-style')
-            if (transformTarget && this.props.history.action == 'POP') {
+            if (transformTarget && this.props.history.action === 'POP') {
                 transformTarget.style.transform = `translateY(-${this.exitingPageY + 1}px)`
             }
         }
     }
     handleAnimationExiting = (node) => {
         let pathname = this.props.location.pathname
-        if (pathname.split('/')[1] === "fulllist" && this.props.history.action == 'PUSH') {
+        if (pathname.split('/')[1] === "fulllist" && this.props.history.action === 'PUSH') {
             this.fullListPushing(node)
         }
     }

@@ -1,13 +1,13 @@
 import React from 'react'
 import classNames from 'classnames'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 
 import {
     Link,
 } from 'react-router-dom'
 
 export default function (props) {
-    const { title, displayTitle, description, extract, thumbnail,
+    const { title, description, extract, thumbnail,
         noborder, liID } = props
     const thumbSrc = thumbnail && thumbnail.source
     const classSet = classNames({

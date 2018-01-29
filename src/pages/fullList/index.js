@@ -3,14 +3,12 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import TopNavBar from '@cpt/top-navbar/'
-import BottomNavBar from '@cpt/bottom-navbar/'
 import WikiList from '@cpt/wiki-list/'
-import WikiListItem from '@cpt/wiki-list-item'
 
 
 class FullList extends React.Component {
     render() {
-        const { history, match, TopTitle, items, } = this.props
+        const { history, items, } = this.props
         return (
             <main className="fulllist">
                 <TopNavBar

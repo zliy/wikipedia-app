@@ -5,13 +5,10 @@ import { withRouter } from 'react-router-dom'
 
 import TopNavBar from '@cpt/top-navbar/'
 import BottomNavBar from '@cpt/bottom-navbar/'
-import WikiListItem from '@cpt/wiki-list-item'
 
 import WikiList from '@cpt/wiki-list/'
 import ActionSheet from '@cpt/action-sheet/'
 import LongPress from '@cpt/longpress/'
-
-import { LONTPRESSTIMEOUT } from '@/constants'
 
 let scroll = 0
 
@@ -70,14 +67,6 @@ class Saved extends React.Component {
         )
     }
 }
-
-
-function fetchSummary(items) {
-    return function (dispatch) {
-        return
-    }
-} 
-
 
 
 function mapState({ saved }) {

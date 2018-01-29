@@ -1,10 +1,6 @@
-import store from '@/store'
-
-
 export default function (state = {}, action) {
     switch (action.type) {
         case "EXPLORE/LOAD_LOCAL": {
-
             return {
                 ...state,
                 isFetching: true,
@@ -19,13 +15,13 @@ export default function (state = {}, action) {
             }
         }
 
-
         case "EXPLORE/FETCH_NEW": {
             return {
                 ...state,
                 isFetching: true,
             }
         }
+
         case "EXPLORE/NEW_FETCHED": {
             return {
                 ...state,

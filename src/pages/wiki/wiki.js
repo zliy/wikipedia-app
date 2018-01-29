@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as actions from './actions'
 import { withRouter } from 'react-router-dom'
 import TopNavBar from '@cpt/top-navbar/'
-import BottomNavBar from '@cpt/bottom-navbar/'
+// import BottomNavBar from '@cpt/bottom-navbar/'
 import PropTypes from 'prop-types'
 
 import { putHistory } from './actions'
@@ -42,7 +42,7 @@ class Wiki extends React.Component {
 
         log(this.props.match.params.idName, 'render')
 
-        const { content, history, match } = this.props
+        const { content, history } = this.props
         return (
             <main className="wiki" >
                 <TopNavBar iconLeft={TopNavBar.i.back} leftContent="Back"
@@ -55,7 +55,9 @@ class Wiki extends React.Component {
                     ? <div id="wiki-style">
                         <div id="content">
                             {content.thumb &&
-                                <div className="wiki-page-cover"><img src={content.thumb.url}/></div>
+                                <div className="wiki-page-cover">
+                                    <img src={content.thumb.url} alt="page cover"/>
+                                </div>
                             }
                             <article className="content" dangerouslySetInnerHTML={{
                                 __html: content.sections && content.sections.reduce((prev, curr) => {
@@ -65,7 +67,7 @@ class Wiki extends React.Component {
                                 }, `<h1>${content.displaytitle}</h1><p>${content.description || ''}</p>`)
                             }}
                                 onClick={(e) => {
-                                    if (e.target.nodeName == 'A') {
+                                    if (e.target.nodeName === 'A') {
                                         let aHref = e.target.getAttribute("href")
                                         if (aHref.startsWith('/wiki/')) {
                                             e.preventDefault()

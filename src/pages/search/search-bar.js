@@ -6,19 +6,21 @@ import close from '@/icon/close.svg'
 
 
 export default class SearchBar extends React.Component {
-
+    componentDidMount() {
+        this.inputNode.focus()
+        // setTimeout(() => this.inputNode.click(), 300) // bug
+    }
 
     handleFocus = () => {
         let that = this
         window.addEventListener('touchmove', function handler() {
-            if (document.activeElement == that.inputNode) {
+            if (document.activeElement === that.inputNode) {
                 that.inputNode.blur()
                 console.log('blur input')
             }
             window.removeEventListener('touchmove', handler)
         })
     }
-
 
     render() {
         const {
@@ -27,7 +29,7 @@ export default class SearchBar extends React.Component {
         return (
             <div className='search-bar'>
                 <div className="search-bar-content">
-                    <i class="search-bar-icon fa fa-search" aria-hidden="true"></i>
+                    <i className="search-bar-icon fa fa-search" aria-hidden="true"></i>
                     <input type="text" placeholder="Search Wikipedia"
                         onFocus={this.handleFocus}
                         ref={(n) => { this.inputNode = n }}

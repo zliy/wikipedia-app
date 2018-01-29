@@ -1,5 +1,5 @@
 import Dexie from 'dexie';
-import db, { tableStruct } from '@/js/db'
+import { tableStruct } from '@/js/db'
 
 const DAYINMS = 86400 * 1000
 const NOW = Date.now()

@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import '@/style.scss'
 import '@/pages/wiki/wikipedia.scss'
-import store, { history } from '@/store.js'
+import store from '@/store.js'
 import App from '@/app'
 
 
@@ -20,10 +20,4 @@ ReactDOM.render(
 
   , document.getElementById('root'))
 
-
-// eslint-disable-next-line
-// setTimeout(() => { if (location.pathname !== '/saved') location.replace('/saved') }, 1000)
-
 window.oncontextmenu = function () { return false; }
-window.store = store
-localStorage.debug = '⭐️Wiki:'

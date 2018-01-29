@@ -47,13 +47,13 @@ export class TopRead extends React.Component {
 
     get dayString() {
         const date = this.props.date
-        let y = date.substr(0, 4)
+        // let y = date.substr(0, 4)
         let m = date.substr(4, 2)
         let d = date.substr(6, 2)
         return `${m}月${d}日`
     }
     render() {
-        const { items, date,
+        const { items, 
             onFooterClick, } = this.props
         return (
             <Card>

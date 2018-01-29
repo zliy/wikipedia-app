@@ -2,8 +2,6 @@
  * @description 封装网络请求，代理请求的本地缓存
 */
 
-
-import _ from 'lodash'
 import db from '@/js/db'
 
 

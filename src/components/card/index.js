@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-import SVG from 'react-inlinesvg';
-import bookmark from '@/icon/bookmark.svg'
-import bookmarko from '@/icon/bookmark-o.svg'
+// import SVG from 'react-inlinesvg';
+// import bookmark from '@/icon/bookmark.svg'
+// import bookmarko from '@/icon/bookmark-o.svg'
 
 
 export const SaveForLater = ({ saved, ...restProps }) => {
@@ -61,7 +60,7 @@ Card.body = function (props) {
 }
 
 Card.footer = function (props) {
-    let { children, to,
+    let { children,
         onFooterClick } = props
     return (
         <footer onClick={onFooterClick}>

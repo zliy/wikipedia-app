@@ -1,5 +1,3 @@
-import store from '@/store'
-import { loadLocal } from './actions'
 import db from '@/js/db'
 
 // savedItems:
@@ -51,7 +49,7 @@ export default function (state = { actTargetID: null }, action) {
             }
         }
         case 'SAVED/CLEAR': {
-            // db.savedItems.clear()
+            db.savedItems.clear()
             return {
                 ...state,
                 savedItems: []
@@ -64,7 +62,7 @@ export default function (state = { actTargetID: null }, action) {
                 savedItems: state.savedItems.filter(({ title }) => {
                     let shoundDel = delTitles.indexOf(title) !== -1
                     if (shoundDel) {
-                        // db.savedItems.where('title').equals(title).delete()
+                        db.savedItems.where('title').equals(title).delete()
                     }
                     return !shoundDel
                 }),

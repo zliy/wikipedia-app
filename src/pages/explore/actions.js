@@ -1,7 +1,6 @@
 import { wikiFetch, WIKIURL } from '@/js/wikifetch'
 import db from '@/js/db'
 import { CARDTYPE } from '@/constants'
-import { TopRead } from '@cpt/typedcards';
 
 export function fetchNew() {
     return function (dispatch, getState) {
@@ -9,8 +8,7 @@ export function fetchNew() {
         return (async function () {
             const fetchedCards = []
             const state = getState()
-            const { explore: { explored }, history } = state
-
+            const { explore: { explored } } = state
 
             {
                 // Random
@@ -25,7 +23,7 @@ export function fetchNew() {
             { // topRead
                 let yestday = new Date(Date.now() - 86400 * 1000)
                 let date = yestday.getFullYear() * 10000 + (yestday.getMonth() + 1) * 100 + yestday.getDate() + ''
-                let isYTDTopReadShowed = explored.some((item) => item.type == 'topRead' && item.date === date)
+                let isYTDTopReadShowed = explored.some((item) => item.type === 'topRead' && item.date === date)
 
                 if (!isYTDTopReadShowed) {
                     let json = await wikiFetch(date, WIKIURL.TOPREAD)
@@ -34,14 +32,14 @@ export function fetchNew() {
                     fetchedCards.unshift({ type: 'topRead', date, items: json.mostread.articles })
                 }
             }
+            /* 
             { // morelike
-                let lastRead = history.historyItems.slice(-1)[0].summary.title
+                // let lastRead = history.historyItems.slice(-1)[0].summary.title
                 // let json = await wikiFetch(title, WIKIURL.MORELIKE)
                 // todo 
 
-            }
-
-
+            } 
+            */
 
 
             dispatch({ type: 'EXPLORE/NEW_FETCHED', payload: fetchedCards })
@@ -67,7 +65,7 @@ export function loadLocal() {
                     ])
                     memo.push(gettings.then(([summary, morelike]) => {
                         const items = []
-                        for (let [key, item] of Object.entries(morelike.query.pages)) {
+                        for (let item of Object.values(morelike.query.pages)) {
                             items.push(item)
                         }
                         return { type: currItem.type, time: currItem.time, summary, items }

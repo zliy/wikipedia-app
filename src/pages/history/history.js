@@ -10,14 +10,12 @@ import { Collapse } from '@cpt/wiki-list-item/'
 import LongPress from '@cpt/longpress/'
 
 import mapTime from '@/js/mapTime'
-import { LONTPRESSTIMEOUT } from '@/constants'
 import ActionSheet from '@cpt/action-sheet/'
 
 
 let scroll = 0
 
 class History extends React.Component {
-
     componentWillUnmount() {
         scroll = window.scrollY
     }
@@ -41,7 +39,6 @@ class History extends React.Component {
                     onTitleClick={() => location.reload()}
                     onLeftClick={clearAll}
                 >History</TopNavBar>
-
 
                 <TransitionGroup>
                     {historyGroups.map(group => {

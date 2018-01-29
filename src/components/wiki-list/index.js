@@ -1,6 +1,6 @@
 import React from 'react'
 import WikiListItem, { Collapse } from '../wiki-list-item'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { TransitionGroup } from 'react-transition-group'
 
 
 export default class extends React.Component {
@@ -14,7 +14,7 @@ export default class extends React.Component {
                         {
                             items.map((item) => {
                                 return (
-                                    <Collapse key={item.title}>
+                                <Collapse key={item.title}>
                                         <WikiListItem noborder={noborder} liID={item.title} {...item }></WikiListItem>
                                     </Collapse>
                                 )

@@ -4,16 +4,12 @@ import { withRouter } from 'react-router-dom'
 
 import TopNavBar from '@cpt/top-navbar/'
 import BottomNavBar from '@cpt/bottom-navbar/'
-import Card from '@cpt/card/'
 import * as Cards from '@cpt/typedcards/'
-
 
 import { CARDTYPE } from '@/constants'
 import * as actions from './actions'
 import { actions as savedAct } from '@/pages/saved/'
 import loadingImg from '@/icon/loading.gif'
-import { spawn } from 'child_process';
-
 
 
 class Loading extends React.Component {
