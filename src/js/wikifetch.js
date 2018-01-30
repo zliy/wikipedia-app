@@ -4,15 +4,11 @@
 
 import db from '@/js/db'
 
-
-
 export function wikiFetch(keyword, url) {
     const headers = new Headers();
     headers.append('Accept-Language', 'zh-cn')
 
-
     switch (url) {
-
         case WIKIURL.SUMMARY: {
             return (async function () {
                 let cachedItem = await db.summaryCache.get({ title: keyword })
