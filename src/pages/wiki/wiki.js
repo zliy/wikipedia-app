@@ -38,11 +38,35 @@ class Wiki extends React.Component {
         log(this.props.match.params.idName, this.props.history.action)
     }
 
-    render() {
+    handleArticleClick = (e) => {
+        if (e.target.nodeName === 'A') {
+            let aHref = e.target.getAttribute("href")
+            if (aHref.startsWith('/wiki/')) {
+                e.preventDefault()
+                this.props.history.push(aHref)
+            }
+        }
+    }
 
+    get wikiPageContent() {
+        let { content } = this.props
+        return content.sections && content.sections.reduce((prev, curr) => {
+            let secHeader = (curr.line && curr.level) ? `<h${curr.level}>${curr.line}</h${curr.level}>` : ''
+            let section = secHeader + curr.text
+            return prev + section
+        }, `<h1>${content.displaytitle}</h1><p>${content.description || ''}</p>`)
+    }
+
+    render() {
         log(this.props.match.params.idName, 'render')
 
         const { content, history } = this.props
+        let isLoaded = content.id
+        let pageCover = content.thumb && (
+            <div className="wiki-page-cover">
+                <img src={content.thumb.url} alt="page cover" />
+            </div>
+        )
         return (
             <main className="wiki" >
                 <TopNavBar iconLeft={TopNavBar.i.back} leftContent="Back"
@@ -51,37 +75,21 @@ class Wiki extends React.Component {
                     <SVG src={wikipediaW} className="wlogo"></SVG>
                 </TopNavBar>
 
-                {content.id
-                    ? <div id="wiki-style">
-                        <div id="content">
-                            {content.thumb &&
-                                <div className="wiki-page-cover">
-                                    <img src={content.thumb.url} alt="page cover"/>
-                                </div>
-                            }
-                            <article className="content" dangerouslySetInnerHTML={{
-                                __html: content.sections && content.sections.reduce((prev, curr) => {
-                                    let secHeader = (curr.line && curr.level) ? `<h${curr.level}>${curr.line}</h${curr.level}>` : ''
-                                    let section = secHeader + curr.text
-                                    return prev + section
-                                }, `<h1>${content.displaytitle}</h1><p>${content.description || ''}</p>`)
-                            }}
-                                onClick={(e) => {
-                                    if (e.target.nodeName === 'A') {
-                                        let aHref = e.target.getAttribute("href")
-                                        if (aHref.startsWith('/wiki/')) {
-                                            e.preventDefault()
-                                            this.props.history.push(aHref)
-                                        }
-                                    }
-                                }} />
+                {
+                    isLoaded ?
+                        <div id="wiki-style">
+                            <div id="content">
+                                {pageCover}
+                                <article className="content"
+                                    dangerouslySetInnerHTML={{ __html: this.wikiPageContent }}
+                                    onClick={this.handleArticleClick} />
+                            </div>
                         </div>
-                    </div>
-                    : <div className="loading">
-                        <img src={loadingImg} alt="" />
-                    </div>}
-
-
+                        :
+                        <div className="loading">
+                            <img src={loadingImg} alt="" />
+                        </div>
+                }
             </main>
         )
     }
