@@ -1,5 +1,5 @@
 const defaultState = {
-    inputingText: '',
+    inputtingText: '',
     results: [],
     recentSearch: [],
 }
@@ -19,6 +19,12 @@ export default function (state = defaultState, action) {
             }
         }
 
+        case "SEARCH/INPUT_CHANGE": {
+            return {
+                ...state,
+                inputtingText: payload
+            }
+        }
         default: {
             return state
         }

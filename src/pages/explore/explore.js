@@ -68,7 +68,8 @@ class Explore extends React.Component {
                     onRightClick={() => this.props.history.push('/search')}
                 >Explore</TopNavBar>
 
-                {isFetching ? <Loading ref={(dom) => { this.loadingDom = dom }} newStyle={this.newStyle}></Loading> : <span style={{ "display": "flex", "justifyContent": "center", "alignItems": "flex-start", "height": "46px", "marginTop": "-46px" }}>下拉刷新</span>}
+                {isFetching ? <Loading ref={(dom) => { this.loadingDom = dom }} newStyle={this.newStyle}></Loading>
+                    : <span style={{ "display": "flex", "justifyContent": "center", "alignItems": "flex-start", "height": "46px", "marginTop": "-46px" }}>下拉刷新</span>}
                 {
                     explored.map((aCard) => {
                         switch (aCard.type) {

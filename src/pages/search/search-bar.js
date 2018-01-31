@@ -7,8 +7,11 @@ import close from '@/icon/close.svg'
 
 export default class SearchBar extends React.Component {
     componentDidMount() {
-        this.inputNode.focus()
-        // setTimeout(() => this.inputNode.click(), 300) // bug
+        let inputNode = this.inputNode
+        inputNode.focus()
+        inputNode.selectionStart = inputNode.value.length
+        inputNode.selectionEnd = inputNode.value.length
+        // setTimeout(() => inputNode.click(), 300) // bug
     }
 
     handleFocus = () => {
@@ -22,10 +25,14 @@ export default class SearchBar extends React.Component {
         })
     }
 
+    handleClearInputClick = () => {
+        this.props.clearInput()
+        this.inputNode.focus()
+    }
     render() {
-        const {
+        const { inputtingText,
             onCloseClick, onInput,
-        } = this.props
+    } = this.props
         return (
             <div className='search-bar'>
                 <div className="search-bar-content">
@@ -33,8 +40,11 @@ export default class SearchBar extends React.Component {
                     <input type="text" placeholder="Search Wikipedia"
                         onFocus={this.handleFocus}
                         ref={(n) => { this.inputNode = n }}
-                        onInput={e => onInput(e.target.value)} />
-                    <i className="clear-input fa fa-times-circle" aria-hidden="true"></i>
+                        value={inputtingText}
+                        onChange={onInput} />{ /* note: why on change*/}
+                    <i className="clear-input fa fa-times-circle" aria-hidden="true"
+                        onClick={this.handleClearInputClick}
+                    />
                     <span className="close-page" onClick={onCloseClick}>
                         <SVG src={close} />
                     </span>

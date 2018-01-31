@@ -16,16 +16,21 @@ class Setting extends React.Component {
                     onLeftClick={() => history.goBack()}
                 >Settings</TopNavBar>
                 <section>
-                    <button style={{ color: "blue" }}
-                        onClick={() => { db.delete().then(() => { window.location.reload() }); }}>
-                        delete indexDB:wikipedia
+                    <ul>
+                        <li>                <button style={{ color: "blue" }}
+                            onClick={() => { window.loadTestDataToIndexDB() }}>
+                            加载测试数据
+                    </button></li>
+                        <li>                    <button style={{ color: "blue" }}
+                            onClick={() => { db.delete().then(() => { window.location.reload() }); }}>
+                            删除数据库
                     </button>
+                        </li>
+                    </ul>
 
 
-                    <button style={{ color: "blue" }}
-                        onClick={() => { window.loadTestDataToIndexDB() }}>
-                        loadTestDataToIndexDB()
-                    </button>
+
+
                 </section>
             </main>
         )

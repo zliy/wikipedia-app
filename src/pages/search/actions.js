@@ -8,3 +8,10 @@ export function requestSearch(keyword) {
         }()
     }
 }
+
+export function changeInput(inputVal) {
+    return {
+        type: 'SEARCH/INPUT_CHANGE',
+        payload: inputVal,
+    }
+}

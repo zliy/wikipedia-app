@@ -36,7 +36,8 @@ class Saved extends React.Component {
                     leftContent={'Clear'}
                     onLeftClick={clearAll}
                     iconRight={TopNavBar.i.search}
-                    onRightClick={window.loadTestDataToIndexDB}
+                    onRightClick={() => this.props.history.push('/search')}
+
                     // eslint-disable-next-line
                     onTitleClick={() => location.reload()}
                 >Saved</TopNavBar>

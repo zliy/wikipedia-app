@@ -4,8 +4,17 @@
 export default function (state = {}, action) {
     switch (action.type) {
 
+        case 'WIKI/ERROR_LOAD': {
+            return {
+                ...state,
+                error: true,
+            }
+        }
         case 'WIKI/LOADING_CONTENT': {
-            return state
+            return {
+                ...state,
+                error: false
+            }
         }
         case 'WIKI/CONTENT_LOADED': {
             return {

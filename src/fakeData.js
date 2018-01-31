@@ -55,12 +55,12 @@ const explored = [
 
     { type: 'random', time: NOW - DAYINMS * 10, title: '鹳科' },
     { type: 'random', time: NOW - DAYINMS * 2, title: '異特龍屬的種' },
-    { type: 'topRead', time: NOW - DAYINMS - 1000, date:'20171223' },
+    { type: 'topRead', time: NOW - DAYINMS - 1000, date: '20171223' },
     { type: 'moreLike', time: NOW - DAYINMS - 1000, title: '帽柱木属' },
     { type: 'random', time: NOW - DAYINMS, title: '诺伊许滕' },
     { type: 'random', time: NOW - 3600 * 1000, title: '帽柱木属' },
-    { type: 'topRead', time: NOW - DAYINMS - 1000, date:'20171224' },
-    
+    { type: 'topRead', time: NOW - DAYINMS - 1000, date: '20171224' },
+
 ]
 
 
@@ -75,8 +75,8 @@ window.loadTestDataToIndexDB = function () {
             .catch((e) => console.log('bulkAdd fail'))
         db.explored.bulkPut(explored)
             .catch((e) => console.log('bulkAdd fail'))
-
-        setTimeout(() => { window.location.reload() }, 100)
+        // eslint-disable-next-line
+        setTimeout(() => { location.href = "/" }, 100)
     }).catch((e) => { console.error(e) })
 }
 // loadTestDataToIndexDB()

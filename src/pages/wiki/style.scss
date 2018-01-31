@@ -7,6 +7,13 @@
         align-items: center;
         height: 500px;
     }
+    
+    .wiki-load-error {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
     .top-navbar {
         .wlogo {
             width: 26px;
@@ -18,21 +25,19 @@
         }
     }
     #wiki-style {
-        .content{
-            h1{
-                margin:10px 0px;
+        .content {
+            h1 {
+                margin: 10px 0px;
             }
-            h1+p{
+            h1+p {
                 color: #888;
             }
-
-
         }
         .wiki-page-cover {
             width: 100%;
             height: 200px;
             overflow: hidden;
-            img{
+            img {
                 width: 100%;
             }
         }

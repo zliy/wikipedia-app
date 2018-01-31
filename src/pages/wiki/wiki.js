@@ -59,8 +59,10 @@ class Wiki extends React.Component {
 
     render() {
         log(this.props.match.params.idName, 'render')
+        const title = this.props.match.params.idName
 
-        const { content, history } = this.props
+        const { content, error, history,
+            loadContent } = this.props
         let isLoaded = content.id
         let pageCover = content.thumb && (
             <div className="wiki-page-cover">
@@ -74,9 +76,18 @@ class Wiki extends React.Component {
                     iconRight={TopNavBar.i.search}>
                     <SVG src={wikipediaW} className="wlogo"></SVG>
                 </TopNavBar>
-
-                {
-                    isLoaded ?
+                {(() => {
+                    if (error) {
+                        return <WikiLoadError onClick={() => loadContent(title)} />
+                    }
+                    if (!isLoaded) {
+                        return (
+                            <div className="loading">
+                                <img src={loadingImg} alt="" />
+                            </div>
+                        )
+                    }
+                    return (
                         <div id="wiki-style">
                             <div id="content">
                                 {pageCover}
@@ -85,10 +96,8 @@ class Wiki extends React.Component {
                                     onClick={this.handleArticleClick} />
                             </div>
                         </div>
-                        :
-                        <div className="loading">
-                            <img src={loadingImg} alt="" />
-                        </div>
+                    )
+                })()
                 }
             </main>
         )
@@ -99,6 +108,7 @@ const mapState = (state, ownProps) => {
     const contents = state.wiki.contents || {}
     return {
         content: contents[ownProps.match.params.idName] || {},
+        error: state.wiki.error
     }
 }
 const mapDispatch = (dispatch) => {
@@ -118,6 +128,17 @@ class WikiToolBar extends React.Component {
         return (
             <div>
                 WikiToolBar
+            </div>
+        )
+    }
+}
+
+class WikiLoadError extends React.Component {
+    render() {
+        const { onClick } = this.props
+        return (
+            <div className="wiki-load-error">
+                <p onClick={onClick}>NetWork Error, Tap to reload</p>
             </div>
         )
     }

@@ -35,9 +35,13 @@ class History extends React.Component {
                     // iconLeft={TopNavBar.i.back}
                     leftContent={'Clear'}
                     iconRight={TopNavBar.i.search}
+                    
                     // eslint-disable-next-line
                     onTitleClick={() => location.reload()}
                     onLeftClick={clearAll}
+
+                    onRightClick={() => this.props.history.push('/search')}
+
                 >History</TopNavBar>
 
                 <TransitionGroup>
