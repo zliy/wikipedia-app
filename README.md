@@ -18,6 +18,17 @@
 * 查看历史记录和删除
 * 随机条目和每日热门推荐
 
+![](https://i.imgur.com/NhIpty9.png)
+
+![](https://i.imgur.com/vB0GjDY.png)
+
+![](https://i.imgur.com/GbZrLZJ.png)
+
+![](https://i.imgur.com/0f9VcVf.png)
+
+![](https://i.imgur.com/xGoD3GI.png)
+
+![](https://i.imgur.com/Qfd7eHF.png)
 
 
 ### 技术栈
