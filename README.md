@@ -18,17 +18,15 @@
 * 查看历史记录和删除
 * 随机条目和每日热门推荐
 
-![](https://i.imgur.com/NhIpty9.png)
+<img src="https://i.imgur.com/NhIpty9.png" width=375/><img src="https://i.imgur.com/vB0GjDY.png" width=375/>
 
-![](https://i.imgur.com/vB0GjDY.png)
+...
 
-![](https://i.imgur.com/GbZrLZJ.png)
+<img src="https://i.imgur.com/GbZrLZJ.png" width=375/><img src="https://i.imgur.com/0f9VcVf.png" width=375/>
 
-![](https://i.imgur.com/0f9VcVf.png)
+...
 
-![](https://i.imgur.com/xGoD3GI.png)
-
-![](https://i.imgur.com/Qfd7eHF.png)
+<img src="https://i.imgur.com/xGoD3GI.png" width=375/><img src="https://i.imgur.com/Qfd7eHF.png" width=375/>
 
 
 ### 技术栈
