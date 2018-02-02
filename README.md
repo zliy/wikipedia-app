@@ -1,6 +1,6 @@
 # Wikipedia App react 
 
-### [在线 Demo](http://demo.zliy.me:8153/)
+### [在线 Demo](https://demo.zliy.me:8153/)
 在主页下拉（IOS）、开始搜索、或者在设置页面加载测试数据。
 
 客户端需要可以直接访问 Wikipedia 服务器。
