@@ -1,6 +1,6 @@
 # Wikipedia App react 
 
-### [在线 Demo](https://demo.zliy.me:8153/)
+### [在线 Demo](https://demo.zliy.me/)
 在主页下拉（IOS）、开始搜索、或者在设置页面加载测试数据。
 
 客户端需要可以直接访问 Wikipedia 服务器。
@@ -17,6 +17,8 @@
 * 收藏和删除
 * 查看历史记录和删除
 * 随机条目和每日热门推荐
+
+### 截图
 
 <img src="https://i.imgur.com/NhIpty9.png" width=375/><img src="https://i.imgur.com/vB0GjDY.png" width=375/>
 
